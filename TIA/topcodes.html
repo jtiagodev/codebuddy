@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>TopCodes Example</title>
+  </head>
+
+  <body>
+    <canvas
+      id="video-canvas"
+      width="800"
+      height="600"
+      style="background: #ddd;"
+    ></canvas>
+    <br />
+    <button
+      id="camera-button"
+      onclick="TopCodes.startStopVideoScan('video-canvas')"
+    >
+      Start / Stop
+    </button>
+
+    <script src="lodash.js"></script>
+    <script src="topcodes.js"></script>
+    <script src="tiasystem.js"></script>
+  </body>
+</html>
