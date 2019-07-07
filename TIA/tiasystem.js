@@ -37,7 +37,7 @@ function runCameraRecognition() {
     // obtain a drawing context from the <canvas>
     var ctx = document.querySelector("#video-canvas").getContext("2d");
     // draw a circle over the top of each TopCode
-    ctx.fillStyle = "rgba(255, 0, 0, 0.3)"; // very translucent red
+    ctx.fillStyle = "rgba(123, 239, 178, 0.5)"; // very translucent red
     for (i = 0; i < topcodes.length; i++) {
       ctx.beginPath();
       ctx.arc(
@@ -61,6 +61,8 @@ function runCameraRecognition() {
 //  |. . . . . .
 // (1,1) ------ > 6
 function runComputation(arrayTopCodes) {
+  var cancelExecution = false;
+
   var codeDictionary = {
     // BOARD CONFIGURATION
     31: { description: "Top Left Boundary" },
@@ -123,6 +125,15 @@ function runComputation(arrayTopCodes) {
       return topcode.code == bottomRightCode;
     });
 
+    if (
+      indexForTopLeftCode === -1 ||
+      indexForTopRightCode === -1 ||
+      indexForBottomLeftCode === -1 ||
+      indexForBottomRightCode === -1
+    ) {
+      cancelExecution = true;
+    }
+
     return {
       topLeftCodeRef: arrayTopCodes[indexForTopLeftCode],
       topRightCodeRef: arrayTopCodes[indexForTopRightCode],
@@ -174,13 +185,16 @@ function runComputation(arrayTopCodes) {
 
   // Vertices
   var codeRef = extractVertixTopCodesRef(arrayTopCodes);
+  if (cancelExecution) {
+    return -1;
+  }
   // Helper Values for Caluclating Positions
   var offSets = calculateXandYOffset(codeRef); // equivalents to (0,0)
   var avgSpaceBetweenBoardCells = calculateAvgDistance(arrayTopCodes);
   // Calculation
 
   function identifyPiecesPresentOnBoard() {
-    var identifiedPiecesOnBoard = {};
+    var identifiedPiecesOnBoard = [];
 
     _.forEach(arrayTopCodes, function(topCode, i) {
       var positions = calculatePositionOfObject(
@@ -189,12 +203,12 @@ function runComputation(arrayTopCodes) {
         offSets.y,
         topCode
       );
-      identifiedPiecesOnBoard[i] = positions;
-      identifiedPiecesOnBoard[i].code = topCode.code;
-      identifiedPiecesOnBoard[i].type = translateCodeIntoType(
-        topCode.code,
-        codeDictionary
-      );
+      identifiedPiecesOnBoard.push(positions);
+      identifiedPiecesOnBoard[identifiedPiecesOnBoard.length - 1].code =
+        topCode.code;
+      identifiedPiecesOnBoard[
+        identifiedPiecesOnBoard.length - 1
+      ].type = translateCodeIntoType(topCode.code, codeDictionary);
     });
     return identifiedPiecesOnBoard;
   }
@@ -211,11 +225,88 @@ function runComputation(arrayTopCodes) {
     return Math.round(coordinateCalculated);
   }
 
-  function calculateVirtualBoard(identifiedPiecesOnBoard) {
-    return [];
+  function convertCodeDescriptionIntoASCII(codeDescription) {
+    switch (codeDescription) {
+      case "Wall": // wall
+        return "x";
+        break;
+      case "Water":
+        return "S";
+        break;
+      case "Door":
+        return "[]";
+        break;
+      case "Code Unknown":
+        return "?";
+        break;
+      case "Empty":
+        return ".";
+        break;
+      default:
+        // empty space
+        return "X";
+        break;
+    }
   }
 
-  console.log(identifyPiecesPresentOnBoard());
+  function calculateVirtualBoard(
+    identifiedPiecesOnBoard,
+    gridConfigurationSize
+  ) {
+    var virtualBoard = [];
+
+    for (var i = 1; i <= gridConfigurationSize; i++) {
+      var newLine = [];
+      virtualBoard.unshift(newLine);
+      for (var j = 1; j <= gridConfigurationSize; j++) {
+        var currentX = j;
+        var currentY = i;
+
+        // Finds the element within the identifiedPieces
+        var indexOfPieceIdentifiedOnPosition = _.findIndex(
+          identifiedPiecesOnBoard,
+          function(piece) {
+            return piece.x == currentX && piece.y == currentY;
+          }
+        );
+        var pieceIdentifiedOnPosition =
+          identifiedPiecesOnBoard[indexOfPieceIdentifiedOnPosition];
+
+        // Adds Empty if nothing found
+        if (pieceIdentifiedOnPosition === undefined) {
+          var emptyObject = {
+            x: currentX,
+            y: currentY,
+            code: 0,
+            type: "Empty"
+          };
+          virtualBoard[0].push(emptyObject); // adds a new Cell
+        } else {
+          virtualBoard[0].push(pieceIdentifiedOnPosition); // adds a new Cell
+        }
+      }
+    }
+
+    return virtualBoard;
+  }
+
+  var identifiedPiecesOnBoard = identifyPiecesPresentOnBoard();
+  var virtualBoard = calculateVirtualBoard(
+    identifiedPiecesOnBoard,
+    gridConfigurationSize
+  );
+
+  printVirtualBoard(virtualBoard);
+
+  function printVirtualBoard(virtualBoard) {
+    _.forEach(virtualBoard, function(line) {
+      var lineArray = [];
+      _.forEach(line, function(identifiedObject) {
+        lineArray.push(convertCodeDescriptionIntoASCII(identifiedObject.type));
+      });
+      console.log(lineArray);
+    });
+  }
 }
 
 runCameraRecognition();
