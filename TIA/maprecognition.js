@@ -86,8 +86,7 @@ function runComputation(arrayTopCodes) {
     151: { description: "Turn Back" },
     // ACTIONS
     155: { description: "Repeat" },
-    157: { description: "Number" },
-    167: { description: "Stop" },
+    157: { description: "Stop" },
     171: { description: "If" },
     173: { description: "Then" },
     179: { description: "Else" },
@@ -101,7 +100,13 @@ function runComputation(arrayTopCodes) {
     211: { description: "Failure" },
     // DASH ROBOT SPECIFIC
     213: { description: "Rotate 360º" },
-    217: { description: "Voice Interesting" }
+    217: { description: "Voice Interesting" },
+    // NUMBERS
+    341: { description: "One Time" },
+    345: { description: "Two Times" },
+    355: { description: "Three Times" },
+    357: { description: "Four Times" },
+    361: { description: "Five Times" }
   };
 
   // CAVEAT reversed X axis markers

@@ -48,13 +48,12 @@ function startSpeechFunction() {
         Math.round(event.results[0][0].confidence * 100) / 100 +
         "% accuracy)";
     } else {
-      // Emulates Continuous Speech Recognition
-      recognition.start();
+      // does nothing
     }
   };
 
   recognition.onspeechend = function() {
-    recognition.stop();
+    // recognition.stop();
     // testBtn.disabled = false;
     // testBtn.textContent = "Start new test";
   };
@@ -80,6 +79,8 @@ function startSpeechFunction() {
     //Fired when the speech recognition service has disconnected.
     console.log("SpeechRecognition.onend");
 
+    // Emulates Continuous Speech Recognition
+    recognition.stop();
     recognition.start();
   };
 
