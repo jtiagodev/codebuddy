@@ -1,3 +1,19 @@
+// Initialize Firebase
+var firebaseApp = firebase.initializeApp(firebaseConfig);
+
+var dbRef = firebaseApp.database().ref();
+var commandsRef = dbRef.child("commands");
+
+function writeCommandToFireBase(commands, dbRef) {
+  var newEntry = {
+    executedOn: new Date().getTime(),
+    commandList: command
+  };
+  dbRef.push(newEntry, () => {
+    console.log("Commands Written in Database");
+  });
+}
+
 var solutionDetectedText = document.querySelector(".solution-detected");
 var solutionDetectedTextv2 = document.querySelector(".solution-detected-v2");
 var solutionDetectedG1 = document.querySelector(".solution-g1");
@@ -113,7 +129,13 @@ function runComputation(arrayTopCodes) {
   solutionDetectedTextv2.textContent = arrayOfObjectsToArrayOfStrings(
     solutionArray
   );
-  solutionDetectedG1.textContent = interfaceWithGroup1(solutionArray);
+  var solutionForGroup1 = interfaceWithGroup1(solutionArray).join("");
+  var lastCommand = solutionDetectedG1[solutionDetectedG1.length - 1];
+  if (lastCommand === "WRITE") {
+    solutionDetectedG1.pop();
+    writeCommandToFireBase(solutionForGroup1, commandsRef);
+  }
+  solutionDetectedG1.textContent = solutionForGroup1;
 }
 
 function detectSolution(arrayTopCodes) {
@@ -146,10 +168,18 @@ function arrayOfObjectsToArrayOfStrings(arrayOfObjects) {
 
 function interfaceWithGroup1(arrayOfObjects) {
   var supportedCommands = {
-    109: "frente",
-    121: "esquerda",
-    143: "direita",
-    151: "tras"
+    109: "frente,",
+    121: "esquerda,",
+    143: "direita,",
+    151: "tras,",
+    155: "<repeat-",
+    157: ">,",
+    341: "1,",
+    345: "2,",
+    355: "3,",
+    357: "4,",
+    361: "5,",
+    557: "WRITE"
   };
 
   var interfaceResponse = [];
