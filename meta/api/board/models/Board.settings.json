@@ -1,0 +1,19 @@
+{
+  "connection": "default",
+  "collectionName": "boards",
+  "info": {
+    "name": "board",
+    "description": "CodeBuddy Default Board"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "comment": ""
+  },
+  "attributes": {
+    "Board": {
+      "required": true,
+      "type": "string"
+    }
+  }
+}
