@@ -1,32 +1,22 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import "./App.css";
-import VideoCanvas from "./VideoCanvas";
-// import VoiceControls from "./VoiceControls";
-import { runCameraRecognition as solutionRecognition } from "./lib/solutionrecognition";
+import DefaultBoards from "./components/DefaultBoards";
+import { executeRobot } from "./lib/execution";
 import { runCameraRecognition as mapRecognition } from "./lib/maprecognition";
-import { startSpeechFunction } from "./lib/voicerecognition";
 import { speak } from "./lib/speechSyntesis";
-import axios from "axios";
+import { startSpeechFunction } from "./lib/voicerecognition";
+import VideoCanvas from "./components/VideoCanvas";
 
 const App = () => {
-  var [username, setUsername] = useState("Friend");
-
-  const executeRobot = async () => {
-    try {
-      return await axios.post("http://localhost:3001/execute", {
-        command: "python scriptCatarina.py [23,23,23,23]"
-      });
-    } catch (error) {
-      console.error(error);
-    }
-  };
+  console.log("APP RENDER");
 
   useEffect(() => {
     speak(
-      "Hello. I am kodi... let's learn to code together. What is your name?"
+      `Hello. I am kodi... let's learn to code together. What is your name?`
     );
     // TODO: capture first answer
     // setUsername(capturedUsername);
+    executeRobot();
     startSpeechFunction();
     //solutionRecognition();
     mapRecognition();
@@ -36,8 +26,7 @@ const App = () => {
   return (
     <div className="App">
       <VideoCanvas />
-      {/* <VoiceControls /> */}
-
+      <DefaultBoards />
       <p>VOICE STATUS:</p>
       <span className="voice-status">Listening...</span>
       <p>LAST VOICE COMMAND:</p>

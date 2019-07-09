@@ -7,12 +7,18 @@
   },
   "options": {
     "increments": true,
-    "timestamps": true,
+    "timestamps": [
+      "created_at",
+      "updated_at"
+    ],
     "comment": ""
   },
   "attributes": {
-    "Board": {
+    "value": {
       "required": true,
+      "type": "string"
+    },
+    "label": {
       "type": "string"
     }
   }

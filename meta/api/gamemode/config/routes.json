@@ -1,0 +1,52 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/gamemodes",
+      "handler": "Gamemode.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/gamemodes/count",
+      "handler": "Gamemode.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/gamemodes/:id",
+      "handler": "Gamemode.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/gamemodes",
+      "handler": "Gamemode.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/gamemodes/:id",
+      "handler": "Gamemode.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/gamemodes/:id",
+      "handler": "Gamemode.delete",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

@@ -27,7 +27,7 @@ app.post("/execute", (req, res) => {
   //       // things failed :(
   //     }
   //   });
-  res.status(202).json({});
+  res.status(200).json({});
 });
 
 // Compute Robot
@@ -35,7 +35,7 @@ app.post("/compute", (req, res) => {
   console.log("COMPUTING");
 
   console.log(req);
-  res.status(202).json({});
+  res.status(200).json({});
 });
 
 var port = process.env.PORT || 3001;

@@ -55,7 +55,7 @@ export const speak = text => {
 
   var utterThis = new SpeechSynthesisUtterance(text);
   utterThis.onend = function(event) {
-    console.log("SpeechSynthesisUtterance.onend");
+    // console.log("SpeechSynthesisUtterance.onend");
   };
   utterThis.onerror = function(event) {
     console.error("SpeechSynthesisUtterance.onerror");
