@@ -13,9 +13,7 @@ const App = () => {
   console.log("APP RENDER");
 
   useEffect(() => {
-    speak(
-      `Hello. I am kodi... let's learn to code together. What is your name?`
-    );
+    speak(`Hello. I am kodi... let's learn to code together.`);
     // TODO: capture first answer
     // setUsername(capturedUsername);
     mapRecognition();
@@ -33,7 +31,7 @@ const App = () => {
       <span className="voice-status">Listening...</span>
       <p>LAST VOICE COMMAND:</p>
       <span className="voice-last-message">listening...</span>
-      <span className="voice-message-confidence" />
+      <span className="voice-confidence" />
       <p>CURRENT SOLUTION:</p>
       <span className="solution-detected">waiting...</span>
       <span className="solution-detected-v2" />

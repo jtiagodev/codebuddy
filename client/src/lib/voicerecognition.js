@@ -6,14 +6,6 @@ var SpeechGrammarList =
 var SpeechRecognitionEvent =
   window.SpeechRecognitionEvent || window.webkitSpeechRecognitionEvent;
 
-// var status = document.querySelector(".voice-status");
-// var lastMessage = document.querySelector(".voice-last-message");
-// var confidenceLevelMessageRecognition = document.querySelector(
-//   ".voice-message-confidence"
-// );
-
-// var activateVoiceButton = document.querySelector(".activate-voice");
-
 const regex = {
   robotNickname: /.*(codi)|(kodi)|(buddy)|(cody).*/
 };
@@ -31,7 +23,11 @@ export const startSpeechFunction = () => {
   recognition.start();
 
   recognition.onresult = function(event) {
-    // status.textContent = "Processing...";
+    let voiceStatus = document.querySelector(".voice-status");
+    voiceStatus.textContent = "Listening...";
+
+    let voiceLastMessage = document.querySelector(".voice-last-message");
+    let confidenceLevel = document.querySelector(".voice-confidence");
 
     // The SpeechRecognitionEvent results property returns a SpeechRecognitionResultList object
     // The SpeechRecognitionResultList object contains SpeechRecognitionResult objects.
@@ -41,33 +37,21 @@ export const startSpeechFunction = () => {
     // These also have getters so they can be accessed like arrays.
     // The second [0] returns the SpeechRecognitionAlternative at position 0.
     // We then return the transcript property of the SpeechRecognitionAlternative object
-    var speechResult = event.results[0][0].transcript.toLowerCase();
+    let speechResult = event.results[0][0].transcript.toLowerCase();
+    let confidenceResult =
+      Math.round(event.results[0][0].confidence * 100) / 100;
     if (speechResult.toLowerCase().match(regex.robotNickname)) {
-      console.log(speechResult);
-      // success
-      // lastMessage.textContent = speechResult;
-      // confidenceLevelMessageRecognition.textContent =
-      //   "(" +
-      //   Math.round(event.results[0][0].confidence * 100) / 100 +
-      //   "% accuracy)";
+      voiceLastMessage.textContent = speechResult;
+      confidenceLevel.textContent = confidenceResult;
     } else {
-      console.log(speechResult);
+      voiceLastMessage.textContent = speechResult;
       // does nothing
     }
   };
 
-  recognition.onspeechend = function() {
-    // recognition.stop();
-    // testBtn.disabled = false;
-    // testBtn.textContent = "Start new test";
-  };
+  recognition.onspeechend = function() {};
 
-  recognition.onerror = function(event) {
-    // testBtn.disabled = false;
-    // testBtn.textContent = "Start new test";
-    // diagnosticPara.textContent =
-    //   "Error occurred in recognition: " + event.error;
-  };
+  recognition.onerror = function(event) {};
 
   recognition.onaudiostart = function(event) {
     //Fired when the user agent has started to capture audio.
@@ -82,6 +66,9 @@ export const startSpeechFunction = () => {
   recognition.onend = function(event) {
     //Fired when the speech recognition service has disconnected.
     //console.log("SpeechRecognition.onend");
+
+    let voiceStatus = document.querySelector(".voice-status");
+    voiceStatus.textContent = "Listening...";
 
     // Emulates Continuous Speech Recognition
     recognition.stop();
@@ -106,6 +93,9 @@ export const startSpeechFunction = () => {
   recognition.onspeechstart = function(event) {
     //Fired when sound that is recognised by the speech recognition service as speech has been detected.
     //console.log("SpeechRecognition.onspeechstart");
+
+    let voiceStatus = document.querySelector(".voice-status");
+    voiceStatus.textContent = "Processing...";
   };
   recognition.onstart = function(event) {
     //Fired when the speech recognition service has begun listening to incoming audio with intent to recognize grammars associated with the current SpeechRecognition.

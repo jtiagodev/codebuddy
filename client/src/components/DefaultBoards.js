@@ -21,10 +21,12 @@ const DefaultBoards = () => {
 
   return (
     <>
-      {data &&
-        _.map(data, (board, k) => {
-          return <DefaultBoard key={k} board={board} />;
-        })}
+      <select>
+        {data &&
+          _.map(data, (board, k) => {
+            return <DefaultBoard key={k} board={board} />;
+          })}
+      </select>
     </>
   );
   // if (loading) {
