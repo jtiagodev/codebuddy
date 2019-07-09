@@ -1,3 +1,5 @@
+import { speak } from "./speechSyntesis";
+
 let currentState = {
 	facing: up,
 	position: (0,0)
@@ -37,3 +39,6 @@ const calculateFacing = (boardConfiguration) => {
 	_.findIndex(flatBoardConfiguration, entry => { return entry === "R" });
 
 }
+
+
+speak("Computation complete!");

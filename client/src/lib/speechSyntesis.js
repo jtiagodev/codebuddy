@@ -50,10 +50,14 @@ populateVoiceList();
 export const speak = text => {
   if (synth.speaking) {
     console.error("speechSynthesis.speaking");
+    // setTimeout(() => {
+    //   synth.speak(utterThis);
+    // }, 3000);
     return;
   }
 
   var utterThis = new SpeechSynthesisUtterance(text);
+
   utterThis.onend = function(event) {
     // console.log("SpeechSynthesisUtterance.onend");
   };

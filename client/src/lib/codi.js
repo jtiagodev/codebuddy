@@ -1,10 +1,23 @@
 export const voiceCommandsRegex = {
-  1: "read sequence",
-  2: "what is this",
-  3: "compute solution",
-  4: "recognize board",
-  5: "recognize sequence",
-  6: "execute solution"
+  //robotNickname: /(codi)|(kodi)|(buddy)|(cody)|(robot)/,
+  readSolution: /.*(what is|read) (this|the)?( )?(solution|sequence).*/,
+  whatIsThis: /.*(what is|what's) (this|that).*/,
+  computeSequence: /.*(compute|check|verify) (solution|sequence).*/,
+  recognizeBoard: /.*(recognize) (board|map).*/,
+  recognizeSolution: /.*(recognize) (solution|sequence).*/,
+  executeSolution: /.*(go|start|execute) (solution|sequence) (codi|kodi|buddy|cody|robot).*/,
+  saveMapToDatabase: /.*(save|send) (map|board).*/,
+  saveSolutionToDatabase: /.*(save|send) (solution|sequence).*/,
+  thankYou: /.*(thank you)|(thanks).*/,
+  whoAreYou: /.*(who are you).*/
+};
+
+export const anglesDirection = {
+  north: 3.0,
+  south1: 0.0,
+  south2: 6.0,
+  west: 4.5,
+  east: 1.5
 };
 
 export const codeDictionary = {
@@ -51,4 +64,18 @@ export const codeDictionary = {
   355: { description: "Three Times" },
   357: { description: "Four Times" },
   361: { description: "Five Times" }
+};
+
+export const validSolutionCommands = {
+  109: "Move",
+  121: "Turn Left",
+  143: "Turn Right",
+  151: "Turn Back",
+  115: "Swim",
+  117: "Open",
+  155: "Repeat",
+  157: "Stop",
+  171: "If",
+  173: "Then",
+  179: "Else"
 };

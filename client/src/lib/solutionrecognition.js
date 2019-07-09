@@ -23,7 +23,7 @@ export const runCameraRecognition = () => {
 
     if (topcodes.length === 0) {
       arrayOfOldCodes = []; // resets to none
-      console.log("NOTHING FOUND");
+      speak("Nothing found");
     } else {
       var arrayOfNewCodes = [];
       _.forEach(topcodes, function(code) {

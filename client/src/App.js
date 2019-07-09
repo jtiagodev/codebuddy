@@ -13,7 +13,7 @@ const App = () => {
   console.log("APP RENDER");
 
   useEffect(() => {
-    speak(`Hello. I am kodi... let's learn to code together.`);
+    // speak(`Hello. I am kodi... let's learn to code together.`);
     // TODO: capture first answer
     // setUsername(capturedUsername);
     mapRecognition();

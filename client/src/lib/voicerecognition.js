@@ -1,3 +1,8 @@
+import { voiceCommandsRegex } from "./codi";
+import { speak } from "./speechSyntesis";
+import { runCameraRecognition as mapRecognition } from "../lib/maprecognition";
+import { runCameraRecognition as solutionRecognition } from "../lib/solutionrecognition";
+
 // Import Web Speech API
 var SpeechRecognition =
   window.SpeechRecognition || window.webkitSpeechRecognition;
@@ -6,13 +11,10 @@ var SpeechGrammarList =
 var SpeechRecognitionEvent =
   window.SpeechRecognitionEvent || window.webkitSpeechRecognitionEvent;
 
-const regex = {
-  robotNickname: /.*(codi)|(kodi)|(buddy)|(cody).*/
-};
-
 export const startSpeechFunction = () => {
   // API
-  var grammar = "#JSGF V1.0; grammar phrase; public <phrase> = codi;";
+  var grammar =
+    "#JSGF V1.0; grammar phrase; public <phrase> = save | send | compute | recognize | execute | solution | sequence | map | codi | database";
   var recognition = new SpeechRecognition();
   var speechRecognitionList = new SpeechGrammarList();
   speechRecognitionList.addFromString(grammar, 1);
@@ -40,12 +42,63 @@ export const startSpeechFunction = () => {
     let speechResult = event.results[0][0].transcript.toLowerCase();
     let confidenceResult =
       Math.round(event.results[0][0].confidence * 100) / 100;
-    if (speechResult.toLowerCase().match(regex.robotNickname)) {
+
+    if (speechResult.toLowerCase().match(voiceCommandsRegex.readSolution)) {
+      speak("Reading Solution....");
       voiceLastMessage.textContent = speechResult;
       confidenceLevel.textContent = confidenceResult;
-    } else {
+    } else if (
+      speechResult.toLowerCase().match(voiceCommandsRegex.whatIsThis)
+    ) {
+      speak("This is .....");
       voiceLastMessage.textContent = speechResult;
-      // does nothing
+      confidenceLevel.textContent = confidenceResult;
+    } else if (
+      speechResult.toLowerCase().match(voiceCommandsRegex.computeSequence)
+    ) {
+      speak("Computing Solution...");
+      voiceLastMessage.textContent = speechResult;
+      confidenceLevel.textContent = confidenceResult;
+    } else if (
+      speechResult.toLowerCase().match(voiceCommandsRegex.recognizeBoard)
+    ) {
+      speak("Recognizing Board");
+      voiceLastMessage.textContent = speechResult;
+      confidenceLevel.textContent = confidenceResult;
+      mapRecognition();
+    } else if (
+      speechResult.toLowerCase().match(voiceCommandsRegex.recognizeSolution)
+    ) {
+      speak("Recognizing Solution");
+      voiceLastMessage.textContent = speechResult;
+      confidenceLevel.textContent = confidenceResult;
+      solutionRecognition();
+    } else if (
+      speechResult.toLowerCase().match(voiceCommandsRegex.executeSolution)
+    ) {
+      speak("Executing Solution");
+      voiceLastMessage.textContent = speechResult;
+      confidenceLevel.textContent = confidenceResult;
+    } else if (speechResult.toLowerCase().match(voiceCommandsRegex.thankYou)) {
+      speak("You are welcome human");
+    } else if (speechResult.toLowerCase().match(voiceCommandsRegex.whoAreYou)) {
+      let phrases = [
+        "I'm a cybernetic organism and i'm here to kill John Connor",
+        "This is my sister, she is number one in kazakhstan!"
+      ];
+      speak(phrases[Math.round(Math.random())]);
+    } else if (
+      speechResult.toLowerCase().match(voiceCommandsRegex.saveMapToDatabase)
+    ) {
+      speak("Saving Map to Database");
+    } else if (
+      speechResult
+        .toLowerCase()
+        .match(voiceCommandsRegex.saveSolutionToDatabase)
+    ) {
+      speak("Saving Solution to Database");
+    } else {
+      voiceLastMessage.textContent = speechResult + "(no command recognized)";
     }
   };
 

@@ -1,6 +1,7 @@
 import _ from "lodash";
 import { writeBoardToFireBase, boardsRef } from "./firebase";
 import { codeDictionary } from "./codi";
+import { speak } from "./speechSyntesis";
 
 export const runCameraRecognition = () => {
   var arrayOfOldCodes = []; // IDs only
@@ -20,7 +21,7 @@ export const runCameraRecognition = () => {
 
     if (topcodes.length === 0) {
       arrayOfOldCodes = []; // resets to none
-      console.log("NOTHING FOUND");
+      speak("Nothing found");
     } else {
       // TOGGLE WRITE TO DATABASE
       if (
@@ -83,6 +84,9 @@ function runComputation(arrayTopCodes, writeToDatabase) {
   var topRightCode = 47;
   var bottomLeftCode = 55;
   var bottomRightCode = 59;
+  var robotCode = 91;
+  var goalCode = 93;
+
   var gridConfigurationSize = 6; // 6x6
 
   function extractVertixTopCodesRef(arrayTopCodes) {
@@ -98,12 +102,20 @@ function runComputation(arrayTopCodes, writeToDatabase) {
     var indexForBottomRightCode = _.findIndex(arrayTopCodes, function(topcode) {
       return topcode.code == bottomRightCode;
     });
+    var indexForRobotStartCode = _.findIndex(arrayTopCodes, function(topcode) {
+      return topcode.code === robotCode;
+    });
+    var indexForGoalCode = _.findIndex(arrayTopCodes, function(topcode) {
+      return topcode.code === goalCode;
+    });
 
     if (
       indexForTopLeftCode === -1 ||
       indexForTopRightCode === -1 ||
       indexForBottomLeftCode === -1 ||
-      indexForBottomRightCode === -1
+      indexForBottomRightCode === -1 ||
+      indexForRobotStartCode === -1 ||
+      indexForGoalCode === -1
     ) {
       cancelExecution = true;
     }
@@ -112,7 +124,9 @@ function runComputation(arrayTopCodes, writeToDatabase) {
       topLeftCodeRef: arrayTopCodes[indexForTopLeftCode],
       topRightCodeRef: arrayTopCodes[indexForTopRightCode],
       bottomLeftCodeRef: arrayTopCodes[indexForBottomLeftCode],
-      bottomRightCodeRef: arrayTopCodes[indexForBottomRightCode]
+      bottomRightCodeRef: arrayTopCodes[indexForBottomRightCode],
+      robotStartCodeRef: arrayTopCodes[indexForRobotStartCode],
+      goalCodeRef: arrayTopCodes[indexForGoalCode]
     };
   }
 
@@ -160,6 +174,7 @@ function runComputation(arrayTopCodes, writeToDatabase) {
   // Vertices
   var codeRef = extractVertixTopCodesRef(arrayTopCodes);
   if (cancelExecution) {
+    speak("Missing pieces");
     return -1;
   }
   // Helper Values for Caluclating Positions
@@ -217,7 +232,7 @@ function runComputation(arrayTopCodes, writeToDatabase) {
         return ".";
         break;
       default:
-        // empty space
+        // corners
         return "X";
         break;
     }
@@ -275,6 +290,7 @@ function runComputation(arrayTopCodes, writeToDatabase) {
   }
 
   printVirtualBoard(virtualBoard);
+  speak("Valid board found");
 
   function printVirtualBoard(virtualBoard) {
     _.forEach(virtualBoard, function(line) {
