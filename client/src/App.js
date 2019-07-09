@@ -3,10 +3,12 @@ import "./App.css";
 import DefaultBoards from "./components/DefaultBoards";
 import { executeRobot } from "./lib/execution";
 import { runCameraRecognition as mapRecognition } from "./lib/maprecognition";
+import { runCameraRecognition as solutionRecognition } from "./lib/solutionrecognition";
+
 import { speak } from "./lib/speechSyntesis";
 import { startSpeechFunction } from "./lib/voicerecognition";
 import VideoCanvas from "./components/VideoCanvas";
-
+import ControlRecognition from "./components/ControlRecognition";
 const App = () => {
   console.log("APP RENDER");
 
@@ -16,10 +18,9 @@ const App = () => {
     );
     // TODO: capture first answer
     // setUsername(capturedUsername);
+    mapRecognition();
     executeRobot();
     startSpeechFunction();
-    //solutionRecognition();
-    mapRecognition();
     window.TopCodes.startStopVideoScan("video-canvas");
   }, []);
 
@@ -27,6 +28,7 @@ const App = () => {
     <div className="App">
       <VideoCanvas />
       <DefaultBoards />
+      <ControlRecognition />
       <p>VOICE STATUS:</p>
       <span className="voice-status">Listening...</span>
       <p>LAST VOICE COMMAND:</p>

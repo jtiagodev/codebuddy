@@ -22,8 +22,8 @@ const DefaultBoards = () => {
   return (
     <>
       {data &&
-        _.map(data, board => {
-          return <DefaultBoard board={board} />;
+        _.map(data, (board, k) => {
+          return <DefaultBoard key={k} board={board} />;
         })}
     </>
   );

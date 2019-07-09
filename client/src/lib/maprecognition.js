@@ -37,7 +37,7 @@ export const runCameraRecognition = () => {
 
       var differenceArray = _.difference(arrayOfNewCodes, arrayOfOldCodes);
       _.forEach(differenceArray, function(newCode) {
-        console.log(newCode);
+        // console.log(newCode);
       });
 
       if (differenceArray.length > 0) {
