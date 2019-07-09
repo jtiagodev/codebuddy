@@ -1,6 +1,6 @@
 import _ from "lodash";
 import { writeBoardToFireBase, boardsRef } from "./firebase";
-import { codeDictionary } from "./codi";
+import { codeDictionary, anglesDirections } from "./codi";
 import { speak } from "./speechSyntesis";
 
 export const runCameraRecognition = () => {
@@ -177,6 +177,36 @@ function runComputation(arrayTopCodes, writeToDatabase) {
     speak("Missing pieces");
     return -1;
   }
+
+  // Check Direction of Start
+  const directionForStart = checkStartDirection(codeRef.robotStartCodeRef);
+  console.log(directionForStart);
+
+  function checkStartDirection(startCode) {
+    let result = {
+      north: 10,
+      south1: 10,
+      south2: 10,
+      west: 10,
+      east: 10
+    };
+
+    _.forEach(anglesDirections, (v, k) => {
+      result[k] = Math.abs(startCode.angle - v);
+    });
+
+    const minDifferenceToResult = _.min(_.values(result));
+    let startDirection = "unrecognized";
+
+    _.forEach(result, (v, k) => {
+      if (v === minDifferenceToResult) {
+        startDirection = k;
+      }
+    });
+
+    return startDirection;
+  }
+
   // Helper Values for Caluclating Positions
   var offSets = calculateXandYOffset(codeRef); // equivalents to (0,0)
   var avgSpaceBetweenBoardCells = calculateAvgDistance(arrayTopCodes);

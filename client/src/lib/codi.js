@@ -12,7 +12,7 @@ export const voiceCommandsRegex = {
   whoAreYou: /.*(who are you).*/
 };
 
-export const anglesDirection = {
+export const anglesDirections = {
   north: 3.0,
   south1: 0.0,
   south2: 6.0,
