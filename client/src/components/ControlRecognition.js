@@ -4,11 +4,15 @@ import { runCameraRecognition as mapRecognition } from "../lib/maprecognition";
 import { runCameraRecognition as solutionRecognition } from "../lib/solutionrecognition";
 import { speak } from "../lib/speechSyntesis";
 
+import { useStateValue } from "../components/StateManagement";
+
 const CurrentlyIdentifying = ({ type }) => {
   return <span>Currently Identifying {type}</span>;
 };
 
 const ControlRecognition = () => {
+  const [{ theme }, dispatch] = useStateValue();
+
   const [identifying, setIdentifying] = useState("Solution");
 
   return (
@@ -17,13 +21,17 @@ const ControlRecognition = () => {
         <Button
           id="Solution"
           icon="code"
-          onClick={event => {
-            setIdentifying("Solution");
+          onClick={() => {
+            dispatch({
+              type: "changeTheme",
+              newTheme: { primary: "blue" }
+            });
+
             speak("Identifying Solution...");
             solutionRecognition();
           }}
         >
-          Recognize Solution
+          {theme.primary}
         </Button>
         <Button
           id="Map"

@@ -9,6 +9,13 @@ import { speak } from "./lib/speechSyntesis";
 import { startSpeechFunction } from "./lib/voicerecognition";
 import VideoCanvas from "./components/VideoCanvas";
 import ControlRecognition from "./components/ControlRecognition";
+
+import {
+  StateProvider,
+  initialState,
+  reducer
+} from "./components/StateManagement";
+
 const App = () => {
   console.log("APP RENDER");
 
@@ -24,24 +31,28 @@ const App = () => {
 
   return (
     <div className="App">
-      <VideoCanvas />
-      <DefaultBoards />
-      <ControlRecognition />
-      <p>VOICE STATUS:</p>
-      <span className="voice-status">Listening...</span>
-      <p>LAST VOICE COMMAND:</p>
-      <span className="voice-last-message">listening...</span>
-      <span className="voice-confidence" />
-      <p>CURRENT SOLUTION:</p>
-      <span className="solution-detected">waiting...</span>
-      <span className="solution-detected-v2" />
-      <p>INTERFACE WITH GROUP 1:</p>
-      <span className="solution-g1" />
-      <span style={{ fontSize: "14px" }}>* limited to commands available</span>
+      <StateProvider initialState={initialState} reducer={reducer}>
+        <VideoCanvas />
+        <DefaultBoards />
+        <ControlRecognition />
+        <p>VOICE STATUS:</p>
+        <span className="voice-status">Listening...</span>
+        <p>LAST VOICE COMMAND:</p>
+        <span className="voice-last-message">listening...</span>
+        <span className="voice-confidence" />
+        <p>CURRENT SOLUTION:</p>
+        <span className="solution-detected">waiting...</span>
+        <span className="solution-detected-v2" />
+        <p>INTERFACE WITH GROUP 1:</p>
+        <span className="solution-g1" />
+        <span style={{ fontSize: "14px" }}>
+          * limited to commands available
+        </span>
 
-      <div onClick={() => executeRobot()}>
-        <span>EXECUTE ROBOT!</span>
-      </div>
+        <div onClick={() => executeRobot()}>
+          <span>EXECUTE ROBOT!</span>
+        </div>
+      </StateProvider>
     </div>
   );
 };
