@@ -6,6 +6,7 @@ import { speak } from "./speechSyntesis";
 export const runCameraRecognition = () => {
   var arrayOfOldCodes = []; // IDs only
 
+  var nothingFoundBefore = false;
   // register a callback function with the TopCode library
   window.TopCodes.setVideoFrameCallback("video-canvas", function(jsonString) {
     let writeToDatabase = false;
@@ -21,7 +22,11 @@ export const runCameraRecognition = () => {
 
     if (topcodes.length === 0) {
       arrayOfOldCodes = []; // resets to none
-      speak("Nothing found");
+      if (nothingFoundBefore) {
+      } else {
+        speak("Nothing found");
+        nothingFoundBefore = true;
+      }
     } else {
       // TOGGLE WRITE TO DATABASE
       if (

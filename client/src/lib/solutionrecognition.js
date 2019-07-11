@@ -10,6 +10,8 @@ import { codeDictionary } from "./codi";
 export const runCameraRecognition = () => {
   var arrayOfOldCodes = []; // IDs only
 
+  var nothingFoundBefore = false;
+
   // register a callback function with the TopCode library
   window.TopCodes.setVideoFrameCallback("video-canvas", function(jsonString) {
     // convert the JSON string to an object
@@ -23,7 +25,11 @@ export const runCameraRecognition = () => {
 
     if (topcodes.length === 0) {
       arrayOfOldCodes = []; // resets to none
-      speak("Nothing found");
+      if (nothingFoundBefore) {
+      } else {
+        speak("Nothing found");
+        nothingFoundBefore = true;
+      }
     } else {
       var arrayOfNewCodes = [];
       _.forEach(topcodes, function(code) {

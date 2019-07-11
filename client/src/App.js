@@ -1,30 +1,21 @@
 import React, { useEffect } from "react";
+import styled from "styled-components";
 import "./App.css";
-import DefaultBoards from "./components/DefaultBoards";
-import { executeRobot } from "./lib/execution";
-import { runCameraRecognition as mapRecognition } from "./lib/maprecognition";
-import { runCameraRecognition as solutionRecognition } from "./lib/solutionrecognition";
-
-import { speak } from "./lib/speechSyntesis";
-import { startSpeechFunction } from "./lib/voicerecognition";
-import VideoCanvas from "./components/VideoCanvas";
-import ControlRecognition from "./components/ControlRecognition";
-
-import ChangeLogs from "./components/ChangeLogs";
-import LatestArtifacts from "./components/LatestArtifacts";
-import ApplicationLinks from "./components/ApplicationLinks";
-import DocumentationLinks from "./components/DocumentationLinks";
-import Installer from "./components/Installer";
+import CameraBlocksDetection from "./components/CameraBlocksDetection";
+import VideoModule from "./components/VideoModule";
 import Footer from "./components/Footer";
 import { Flex } from "./components/Grid";
-
+import VoiceModule from "./components/VoiceModule";
 import {
-  StateProvider,
   initialState,
-  reducer
+  reducer,
+  StateProvider
 } from "./components/StateManagement";
-
-import styled from "styled-components";
+import VideoCanvas from "./components/VideoCanvas";
+import { executeRobot } from "./lib/execution";
+import { runCameraRecognition as mapRecognition } from "./lib/maprecognition";
+import { startSpeechFunction } from "./lib/voicerecognition";
+import SystemStatus from "./components/SystemStatus";
 
 const Body = styled(Flex)`
   width: 100vw;
@@ -48,9 +39,8 @@ const App = () => {
   console.log("APP RENDER");
 
   useEffect(() => {
-    // speak(`Hello. I am kodi... let's learn to code together.`);
+    // speak(`Hello. I am kodi... let's learn to code together. What's your name?`);
     // TODO: capture first answer
-    // setUsername(capturedUsername);
     mapRecognition();
     executeRobot();
     startSpeechFunction();
@@ -62,37 +52,15 @@ const App = () => {
       <StateProvider initialState={initialState} reducer={reducer}>
         <Body>
           <OneThirdFlex>
-            <Installer>
+            <CameraBlocksDetection>
               <VideoCanvas />
-            </Installer>
-            <DocumentationLinks />
-            <ApplicationLinks />
+            </CameraBlocksDetection>
+            <SystemStatus />
           </OneThirdFlex>
           <TwoThirdsFlex>
-            <LatestArtifacts />
-            <ChangeLogs />
+            <VoiceModule />
+            <VideoModule />
           </TwoThirdsFlex>
-
-          {/* REMOVE THIS */}
-          <DefaultBoards />
-          <ControlRecognition />
-          <p>VOICE STATUS:</p>
-          <span className="voice-status">Listening...</span>
-          <p>LAST VOICE COMMAND:</p>
-          <span className="voice-last-message">listening...</span>
-          <span className="voice-confidence" />
-          <p>CURRENT SOLUTION:</p>
-          <span className="solution-detected">waiting...</span>
-          <span className="solution-detected-v2" />
-          <p>INTERFACE WITH GROUP 1:</p>
-          <span className="solution-g1" />
-          <span style={{ fontSize: "14px" }}>
-            * limited to commands available
-          </span>
-
-          <div onClick={() => executeRobot()}>
-            <span>EXECUTE ROBOT!</span>
-          </div>
         </Body>
         <Footer />
       </StateProvider>

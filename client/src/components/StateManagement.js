@@ -9,7 +9,8 @@ export const StateProvider = ({ reducer, initialState, children }) => (
 export const useStateValue = () => useContext(StateContext);
 
 export const initialState = {
-  theme: { primary: "green" }
+  theme: { primary: "green" },
+  status: { system: "online", voice: "offline", video: "offline" }
 };
 
 export const reducer = (state, action) => {
@@ -18,6 +19,12 @@ export const reducer = (state, action) => {
       return {
         ...state,
         theme: action.newTheme
+      };
+
+    case "changeVoiceStatus":
+      return {
+        ...state,
+        system: action.newVoiceStatus
       };
 
     default:

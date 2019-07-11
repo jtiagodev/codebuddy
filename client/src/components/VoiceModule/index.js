@@ -1,15 +1,14 @@
+import { Cell } from "@blueprintjs/table";
 import React from "react";
-import { Title } from "../Typography";
-import { colorPalette } from "./../../theme/color-pallete";
 import styled from "styled-components";
-import { Flex } from "../Grid";
-import { Cell, Column, Table, SelectionModes } from "@blueprintjs/table";
 import BoxTitle from "../BoxTitle";
-import ContainerDimensions from "react-container-dimensions";
+import { Flex } from "../Grid";
+import ControlRecognition from "../ControlRecognition";
+import DefaultBoards from "../DefaultBoards";
 
 const Wrapper = styled(Flex)`
   background: #27343e;
-  height: 40vh;
+  height: 45%;
   margin: 2vh 2vh 2vh 0px;
   padding: 10px;
   border-radius: 5px;
@@ -46,12 +45,22 @@ const cellRendererLink = number => {
   return <Cell>{data[number].link}</Cell>;
 };
 
-const LatestArtifacts = () => {
+const VoiceModule = ({ children }) => {
   return (
     <Wrapper flexDirection="column">
-      <BoxTitle icon="layers" title="ARTIFACTS" />
+      {children}
 
-      <ContainerDimensions>
+      <BoxTitle icon="layers" title="VOICE MODULE" />
+
+      {/* <DefaultBoards /> */}
+      <ControlRecognition />
+      <p>VOICE STATUS:</p>
+      <span className="voice-status">Listening...</span>
+      <p>LAST VOICE COMMAND:</p>
+      <span className="voice-last-message">listening...</span>
+      <span className="voice-confidence" />
+
+      {/* <ContainerDimensions>
         {({ width, height }) => {
           let fifthWidth = width / 5 - 5;
 
@@ -79,9 +88,9 @@ const LatestArtifacts = () => {
             </Table>
           );
         }}
-      </ContainerDimensions>
+      </ContainerDimensions> */}
     </Wrapper>
   );
 };
 
-export default LatestArtifacts;
+export default VoiceModule;
