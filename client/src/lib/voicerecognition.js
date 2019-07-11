@@ -14,7 +14,7 @@ var SpeechRecognitionEvent =
 export const startSpeechFunction = () => {
   // API
   var grammar =
-    "#JSGF V1.0; grammar phrase; public <phrase> = save | send | compute | recognize | execute | solution | sequence | map | codi | database";
+    "#JSGF V1.0; grammar phrase; public <phrase> = save | send | compute | recognize | execute | solution | sequence | commands | board | map | codi | database";
   var recognition = new SpeechRecognition();
   var speechRecognitionList = new SpeechGrammarList();
   speechRecognitionList.addFromString(grammar, 1);

@@ -10,11 +10,39 @@ import { startSpeechFunction } from "./lib/voicerecognition";
 import VideoCanvas from "./components/VideoCanvas";
 import ControlRecognition from "./components/ControlRecognition";
 
+import ChangeLogs from "./components/ChangeLogs";
+import LatestArtifacts from "./components/LatestArtifacts";
+import ApplicationLinks from "./components/ApplicationLinks";
+import DocumentationLinks from "./components/DocumentationLinks";
+import Installer from "./components/Installer";
+import Footer from "./components/Footer";
+import { Flex } from "./components/Grid";
+
 import {
   StateProvider,
   initialState,
   reducer
 } from "./components/StateManagement";
+
+import styled from "styled-components";
+
+const Body = styled(Flex)`
+  width: 100vw;
+  height: 100vh;
+  background: #30404d;
+  flex-direction: row;
+  flex-wrap: wrap;
+`;
+
+const OneThirdFlex = styled(Flex)`
+  flex-direction: column;
+  flex: 1;
+`;
+
+const TwoThirdsFlex = styled(Flex)`
+  flex-direction: column;
+  flex: 2;
+`;
 
 const App = () => {
   console.log("APP RENDER");
@@ -32,26 +60,41 @@ const App = () => {
   return (
     <div className="App">
       <StateProvider initialState={initialState} reducer={reducer}>
-        <VideoCanvas />
-        <DefaultBoards />
-        <ControlRecognition />
-        <p>VOICE STATUS:</p>
-        <span className="voice-status">Listening...</span>
-        <p>LAST VOICE COMMAND:</p>
-        <span className="voice-last-message">listening...</span>
-        <span className="voice-confidence" />
-        <p>CURRENT SOLUTION:</p>
-        <span className="solution-detected">waiting...</span>
-        <span className="solution-detected-v2" />
-        <p>INTERFACE WITH GROUP 1:</p>
-        <span className="solution-g1" />
-        <span style={{ fontSize: "14px" }}>
-          * limited to commands available
-        </span>
+        <Body>
+          <OneThirdFlex>
+            <Installer>
+              <VideoCanvas />
+            </Installer>
+            <DocumentationLinks />
+            <ApplicationLinks />
+          </OneThirdFlex>
+          <TwoThirdsFlex>
+            <LatestArtifacts />
+            <ChangeLogs />
+          </TwoThirdsFlex>
 
-        <div onClick={() => executeRobot()}>
-          <span>EXECUTE ROBOT!</span>
-        </div>
+          {/* REMOVE THIS */}
+          <DefaultBoards />
+          <ControlRecognition />
+          <p>VOICE STATUS:</p>
+          <span className="voice-status">Listening...</span>
+          <p>LAST VOICE COMMAND:</p>
+          <span className="voice-last-message">listening...</span>
+          <span className="voice-confidence" />
+          <p>CURRENT SOLUTION:</p>
+          <span className="solution-detected">waiting...</span>
+          <span className="solution-detected-v2" />
+          <p>INTERFACE WITH GROUP 1:</p>
+          <span className="solution-g1" />
+          <span style={{ fontSize: "14px" }}>
+            * limited to commands available
+          </span>
+
+          <div onClick={() => executeRobot()}>
+            <span>EXECUTE ROBOT!</span>
+          </div>
+        </Body>
+        <Footer />
       </StateProvider>
     </div>
   );
