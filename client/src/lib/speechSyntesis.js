@@ -48,18 +48,34 @@ populateVoiceList();
 // }
 
 export const speak = text => {
-  if (synth.speaking) {
-    console.error("speechSynthesis.speaking");
-    // setTimeout(() => {
-    //   synth.speak(utterThis);
-    // }, 3000);
-    return;
-  }
-
   var utterThis = new SpeechSynthesisUtterance(text);
 
+  // if (synth.speaking) {
+  //   console.error("speechSynthesis.speaking");
+  //   // setTimeout(() => {
+  //   //   synth.speak(utterThis);
+  //   // }, 3000);
+  //   return;
+  // }
+
+  utterThis.onboundary = function(event) {
+    console.log("SpeechSynthesisUtterance.onboundary");
+  };
+
+  utterThis.onmark = function(event) {
+    console.log("SpeechSynthesisUtterance.onmark");
+  };
+
+  utterThis.onresume = function(event) {
+    console.log("SpeechSynthesisUtterance.onresume");
+  };
+
+  utterThis.onstart = function(event) {
+    console.log("SpeechSynthesisUtterance.onstart");
+  };
+
   utterThis.onend = function(event) {
-    // console.log("SpeechSynthesisUtterance.onend");
+    console.log("SpeechSynthesisUtterance.onend");
   };
   utterThis.onerror = function(event) {
     console.error("SpeechSynthesisUtterance.onerror");

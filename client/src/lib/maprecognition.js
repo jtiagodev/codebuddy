@@ -126,7 +126,8 @@ function runComputation(arrayTopCodes, writeToDatabase) {
       bottomLeftCodeRef: arrayTopCodes[indexForBottomLeftCode],
       bottomRightCodeRef: arrayTopCodes[indexForBottomRightCode],
       robotStartCodeRef: arrayTopCodes[indexForRobotStartCode],
-      goalCodeRef: arrayTopCodes[indexForGoalCode]
+      goalCodeRef: arrayTopCodes[indexForGoalCode],
+      robotStartIndex: indexForRobotStartCode
     };
   }
 
@@ -180,7 +181,7 @@ function runComputation(arrayTopCodes, writeToDatabase) {
 
   // Check Direction of Start
   const directionForStart = checkStartDirection(codeRef.robotStartCodeRef);
-  console.log(directionForStart);
+  arrayTopCodes[codeRef.robotStartIndex].direction = directionForStart;
 
   function checkStartDirection(startCode) {
     let result = {
@@ -247,10 +248,10 @@ function runComputation(arrayTopCodes, writeToDatabase) {
   function convertCodeDescriptionIntoASCII(codeDescription) {
     switch (codeDescription) {
       case "Wall": // wall
-        return "x";
+        return "#";
         break;
       case "Water":
-        return "S";
+        return "~";
         break;
       case "Door":
         return "[]";
@@ -259,11 +260,20 @@ function runComputation(arrayTopCodes, writeToDatabase) {
         return "?";
         break;
       case "Empty":
-        return ".";
+        return " ";
+        break;
+      case "Start":
+        return "R";
+        break;
+      case "Points":
+        return "*";
+        break;
+      case "Goal":
+        return "G";
         break;
       default:
         // corners
-        return "X";
+        return "#";
         break;
     }
   }
