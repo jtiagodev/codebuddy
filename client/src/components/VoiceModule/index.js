@@ -3,7 +3,6 @@ import React from "react";
 import styled from "styled-components";
 import BoxTitle from "../BoxTitle";
 import { Flex } from "../Grid";
-import ControlRecognition from "../ControlRecognition";
 import DefaultBoards from "../DefaultBoards";
 
 const Wrapper = styled(Flex)`
@@ -53,12 +52,18 @@ const VoiceModule = ({ children }) => {
       <BoxTitle icon="layers" title="VOICE MODULE" />
 
       {/* <DefaultBoards /> */}
-      <ControlRecognition />
-      <p>VOICE STATUS:</p>
-      <span className="voice-status">Listening...</span>
-      <p>LAST VOICE COMMAND:</p>
-      <span className="voice-last-message">listening...</span>
-      <span className="voice-confidence" />
+      <strong>
+        <p style={{ color: "white" }}>VOICE STATUS:</p>
+      </strong>
+      <span style={{ color: "white" }} className="voice-status">
+        Listening...
+      </span>
+      <strong>
+        <p style={{ color: "white" }}>LAST VOICE COMMAND:</p>
+      </strong>
+
+      <span style={{ color: "white" }} className="voice-last-message" />
+      <p style={{ color: "white" }} className="voice-confidence" />
 
       {/* <ContainerDimensions>
         {({ width, height }) => {

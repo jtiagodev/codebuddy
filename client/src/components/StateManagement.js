@@ -10,7 +10,7 @@ export const useStateValue = () => useContext(StateContext);
 
 export const initialState = {
   theme: { primary: "green" },
-  status: { system: "online", voice: "offline", video: "offline" }
+  status: { system: "online", voice: "online", video: "online" }
 };
 
 export const reducer = (state, action) => {

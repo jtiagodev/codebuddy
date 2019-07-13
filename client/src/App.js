@@ -13,6 +13,8 @@ import {
 } from "./components/StateManagement";
 import VideoCanvas from "./components/VideoCanvas";
 import { executeRobot } from "./lib/execution";
+import { speak } from "./lib/speechSyntesis";
+
 import { runCameraRecognition as mapRecognition } from "./lib/maprecognition";
 import { startSpeechFunction } from "./lib/voicerecognition";
 import SystemStatus from "./components/SystemStatus";
@@ -36,10 +38,12 @@ const TwoThirdsFlex = styled(Flex)`
 `;
 
 const App = () => {
-  console.log("APP RENDER");
+  // console.log("APP RENDER");
 
   useEffect(() => {
-    // speak(`Hello. I am kodi... let's learn to code together. What's your name?`);
+    speak(
+      `Hello. I am kodi... let's learn to code together. What's your name?`
+    );
     // TODO: capture first answer
     mapRecognition();
     executeRobot();

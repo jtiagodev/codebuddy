@@ -31,7 +31,7 @@ const ControlRecognition = () => {
             solutionRecognition();
           }}
         >
-          {theme.primary}
+          Recognize Commands
         </Button>
         <Button
           id="Map"
@@ -42,7 +42,7 @@ const ControlRecognition = () => {
             mapRecognition();
           }}
         >
-          Recognize Map
+          Recognize Board
         </Button>
       </ButtonGroup>
       <CurrentlyIdentifying type={identifying} />

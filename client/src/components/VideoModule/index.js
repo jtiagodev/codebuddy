@@ -18,12 +18,20 @@ const VideoModule = ({ children }) => {
       <BoxTitle icon="history" title="VIDEO MODULE" />
       {children}
 
-      <p>CURRENT SOLUTION:</p>
-      <span className="solution-detected">waiting...</span>
-      <span className="solution-detected-v2" />
-      <p>INTERFACE WITH GROUP 1:</p>
-      <span className="solution-g1" />
-      <span style={{ fontSize: "14px" }}>* limited to commands available</span>
+      <p style={{ color: "white" }}>
+        <strong>CURRENT SOLUTION:</strong>
+      </p>
+      <span style={{ color: "white" }} className="solution-detected">
+        waiting...
+      </span>
+      <span style={{ color: "white" }} className="solution-detected-v2" />
+      <p style={{ color: "white" }}>
+        <strong>INTERFACE WITH GROUP 1:</strong>
+      </p>
+      <span style={{ color: "white" }} className="solution-g1" />
+      <p style={{ color: "white", fontSize: "14px" }}>
+        * limited to commands available
+      </p>
     </Wrapper>
   );
 };

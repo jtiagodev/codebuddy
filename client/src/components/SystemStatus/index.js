@@ -5,6 +5,7 @@ import BoxTitle from "../BoxTitle";
 import { Flex } from "../Grid";
 import LinksDef from "./links";
 import { useStateValue } from "../StateManagement";
+import ControlRecognition from "../ControlRecognition";
 
 import { executeRobot } from "../../lib/execution";
 import { Button } from "react-bootstrap";
@@ -91,13 +92,12 @@ const SystemStatus = ({ children }) => {
       <BoxTitle icon="document" title="SYSTEM STATUS" />
       {children}
 
-      <span>SYSTEM:</span>
-      {renderStatus(systemStatus)}
-      <span>VOICE RECOGNITION:</span>
-      {renderStatus(voiceStatus)}
-      <span>VOICE RECOGNITION:</span>
-      {renderStatus(videoStatus)}
-
+      <span>SYSTEM: {renderStatus(systemStatus)}</span>
+      <span>VOICE RECOGNITION: {renderStatus(voiceStatus)}</span>
+      <span>VIDEO RECOGNITION: {renderStatus(videoStatus)}</span>
+      <br />
+      <ControlRecognition />
+      <br />
       <div onClick={() => executeRobot()}>
         <Button variant="primary">EXECUTE</Button>
       </div>

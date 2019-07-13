@@ -59,26 +59,26 @@ export const speak = text => {
   // }
 
   utterThis.onboundary = function(event) {
-    console.log("SpeechSynthesisUtterance.onboundary");
+    // console.log("SpeechSynthesisUtterance.onboundary");
   };
 
   utterThis.onmark = function(event) {
-    console.log("SpeechSynthesisUtterance.onmark");
+    // console.log("SpeechSynthesisUtterance.onmark");
   };
 
   utterThis.onresume = function(event) {
-    console.log("SpeechSynthesisUtterance.onresume");
+    // console.log("SpeechSynthesisUtterance.onresume");
   };
 
   utterThis.onstart = function(event) {
-    console.log("SpeechSynthesisUtterance.onstart");
+    // console.log("SpeechSynthesisUtterance.onstart");
   };
 
   utterThis.onend = function(event) {
-    console.log("SpeechSynthesisUtterance.onend");
+    // console.log("SpeechSynthesisUtterance.onend");
   };
   utterThis.onerror = function(event) {
-    console.error("SpeechSynthesisUtterance.onerror");
+    // console.error("SpeechSynthesisUtterance.onerror");
   };
   //   var selectedOption = voiceSelect.selectedOptions[0].getAttribute("data-name");
   //   for (let i = 0; i < voices.length; i++) {
