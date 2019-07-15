@@ -43,7 +43,7 @@ export const runCameraRecognition = (appActions, userName = "friend") => {
       });
 
       if (differenceArray.length > 0 || differenceArray2.length > 0) {
-        runComputation(topcodes);
+        runComputation(topcodes, appActions, userName);
       }
 
       // TIA: Updates array with new value read
@@ -69,26 +69,23 @@ export const runCameraRecognition = (appActions, userName = "friend") => {
   });
 };
 
-function runComputation(arrayTopCodes) {
+function runComputation(arrayTopCodes, appActions, userName) {
   var solutionArray = detectSolution(arrayTopCodes);
-  let solutionDetectedComponent = document.querySelector(".solution-detected");
-  solutionDetectedComponent.textContent = arrayOfObjectsToArrayOfCodes(
-    solutionArray
-  );
-  let solutionDetectedComponentv2 = document.querySelector(
-    ".solution-detected-v2"
-  );
-  solutionDetectedComponentv2.textContent = arrayOfObjectsToArrayOfStrings(
-    solutionArray
-  );
   var solutionForGroup1 = interfaceWithGroup1(solutionArray);
+
+  appActions.setVideoIdentifiedCommands(
+    arrayOfObjectsToArrayOfCodes(solutionArray)
+  );
+  appActions.setVideoIdentifiedCommandsAsStrings(
+    arrayOfObjectsToArrayOfStrings(solutionArray)
+  );
+  appActions.setVideoCommandsInterfaceGroup1(solutionForGroup1);
+
   var lastCommand = solutionForGroup1[solutionForGroup1.length - 1];
   if (lastCommand === "WRITE") {
     solutionForGroup1.pop();
     writeCommandToFireBase(solutionForGroup1, commandsRef);
   }
-  let solutionDetectedG1 = document.querySelector(".solution-g1");
-  solutionDetectedG1.textContent = solutionForGroup1;
 }
 
 function detectSolution(arrayTopCodes) {

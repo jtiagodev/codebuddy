@@ -78,6 +78,7 @@ export const initialState = {
   video: {
     identifiedBoard: [],
     identifiedCommands: [],
+    identifiedCommmandsAsStrings: [],
     commandsInterfaceGroup1: ""
   }
 };
@@ -210,6 +211,14 @@ export const reducer = (state, action) => {
         video: {
           ...state.video,
           identifiedCommands: action.identifiedCommands
+        }
+      };
+    case "SET_VIDEO_IDENTIFIEDCOMMANDS_STRINGS":
+      return {
+        ...state,
+        video: {
+          ...state.video,
+          identifiedCommmandsAsStrings: action.identifiedCommmandsAsStrings
         }
       };
 

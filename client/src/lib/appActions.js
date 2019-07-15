@@ -116,6 +116,13 @@ const appActions = dispatch => {
     });
   };
 
+  const setVideoIdentifiedCommandsAsStrings = identifiedCommmandsAsStrings => {
+    dispatch({
+      type: "SET_VIDEO_IDENTIFIEDCOMMANDS_STRINGS",
+      identifiedCommmandsAsStrings
+    });
+  };
+
   return {
     setExecuted,
     setVoiceLastcommandDetected,
@@ -133,6 +140,7 @@ const appActions = dispatch => {
     setConfigAvailableVoiceCommands,
     setVideoIdentifiedBoard,
     setVideoIdentifiedCommands,
+    setVideoIdentifiedCommandsAsStrings,
     setVideoCommandsInterfaceGroup1
   };
 };

@@ -2,6 +2,8 @@ import React from "react";
 import styled from "styled-components";
 import { Flex } from "../Grid";
 import BoxTitle from "./../BoxTitle";
+import { useStateValue } from "../StateManagement";
+import VideoPanel from "../VideoPanel";
 
 const Wrapper = styled(Flex)`
   background: #82b6ff;
@@ -13,25 +15,25 @@ const Wrapper = styled(Flex)`
 `;
 
 const VideoModule = ({ children }) => {
+  const [{ video }, dispatch] = useStateValue();
+  const {
+    identifiedBoard,
+    identifiedCommands,
+    identifiedCommmandsAsStrings,
+    commandsInterfaceGroup1
+  } = video;
+
   return (
     <Wrapper alignItems="start" style={{ flexDirection: "column" }}>
       <BoxTitle icon="camera" title="VIDEO MODULE" />
       {children}
 
-      <p style={{ color: "white" }}>
-        <strong>CURRENT SOLUTION:</strong>
-      </p>
-      <span style={{ color: "white" }} className="solution-detected">
-        waiting...
-      </span>
-      <span style={{ color: "white" }} className="solution-detected-v2" />
-      <p style={{ color: "white" }}>
-        <strong>INTERFACE WITH GROUP 1:</strong>
-      </p>
-      <span style={{ color: "white" }} className="solution-g1" />
-      <p style={{ color: "white", fontSize: "14px" }}>
-        * limited to commands available
-      </p>
+      <VideoPanel
+        identifiedBoard={identifiedBoard}
+        identifiedCommands={identifiedCommands}
+        identifiedCommmandsAsStrings={identifiedCommmandsAsStrings}
+        commandsInterfaceGroup1={commandsInterfaceGroup1}
+      />
     </Wrapper>
   );
 };
