@@ -1,4 +1,11 @@
 const appActions = dispatch => {
+  const setVideoRobotStartDirection = robotStartDirection => {
+    dispatch({
+      type: "SET_ROBOT_START_DIRECTION",
+      robotStartDirection
+    });
+  };
+
   const setVoiceLastcommandDetected = lastCommandIdentified => {
     dispatch({
       type: "SET_VOICE_LASTCOMMANDDETECTED",
@@ -141,7 +148,8 @@ const appActions = dispatch => {
     setVideoIdentifiedBoard,
     setVideoIdentifiedCommands,
     setVideoIdentifiedCommandsAsStrings,
-    setVideoCommandsInterfaceGroup1
+    setVideoCommandsInterfaceGroup1,
+    setVideoRobotStartDirection
   };
 };
 

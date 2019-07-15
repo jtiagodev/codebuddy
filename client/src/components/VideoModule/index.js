@@ -20,7 +20,8 @@ const VideoModule = ({ children }) => {
     identifiedBoard,
     identifiedCommands,
     identifiedCommmandsAsStrings,
-    commandsInterfaceGroup1
+    commandsInterfaceGroup1,
+    robotStartDirection
   } = video;
 
   return (
@@ -33,6 +34,7 @@ const VideoModule = ({ children }) => {
         identifiedCommands={identifiedCommands}
         identifiedCommmandsAsStrings={identifiedCommmandsAsStrings}
         commandsInterfaceGroup1={commandsInterfaceGroup1}
+        robotStartDirection={robotStartDirection}
       />
     </Wrapper>
   );

@@ -7,7 +7,8 @@ const VideoPanel = ({
   identifiedBoard,
   identifiedCommands,
   identifiedCommmandsAsStrings,
-  commandsInterfaceGroup1
+  commandsInterfaceGroup1,
+  robotStartDirection
 }) => {
   // sample nested array
   var pets = new Array();
@@ -36,6 +37,14 @@ const VideoPanel = ({
           {commandsInterfaceGroup1}
         </span>
       </span>
+
+      <span style={{ fontFamily: "Delius Swash Caps", color: "black" }}>
+        Robot is facing:{" "}
+        <span style={{ fontFamily: "Delius Swash Caps", color: "black" }}>
+          {robotStartDirection}
+        </span>
+      </span>
+
       {/* </Flex> */}
 
       {/* <Flex flexDirection="column"> */}

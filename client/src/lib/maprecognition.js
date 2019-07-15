@@ -2,6 +2,7 @@ import _ from "lodash";
 import { writeBoardToFireBase, boardsRef } from "./firebase";
 import { codeDictionary, anglesDirections } from "./codi";
 import { speak } from "./speechSyntesis";
+import { app } from "firebase";
 
 export const runCameraRecognition = (appActions, userName = "friend") => {
   var arrayOfOldCodes = []; // IDs only
@@ -187,6 +188,7 @@ function runComputation(arrayTopCodes, writeToDatabase, appActions, userName) {
   // Check Direction of Start
   const directionForStart = checkStartDirection(codeRef.robotStartCodeRef);
   arrayTopCodes[codeRef.robotStartIndex].direction = directionForStart;
+  appActions.setVideoRobotStartDirection(directionForStart);
 
   function checkStartDirection(startCode) {
     let result = {

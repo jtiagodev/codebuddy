@@ -77,12 +77,22 @@ export const initialState = {
     identifiedBoard: [],
     identifiedCommands: [],
     identifiedCommmandsAsStrings: [],
-    commandsInterfaceGroup1: ""
+    commandsInterfaceGroup1: "",
+    robotStartDirection: ""
   }
 };
 
 export const reducer = (state, action) => {
   switch (action.type) {
+    case "SET_ROBOT_START_DIRECTION":
+      return {
+        ...state,
+        video: {
+          ...state.video,
+          robotStartDirection: action.robotStartDirection
+        }
+      };
+
     case "SET_EXECUTED":
       return {
         ...state,
