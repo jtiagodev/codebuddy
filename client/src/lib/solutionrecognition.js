@@ -7,9 +7,8 @@ import { codeDictionary } from "./codi";
 // var sutionDetectedTextv2 = document.querySelector(".solution-detected-v2");
 // var solutionDetectedG1 = document.querySelector(".solution-g1");
 
-export const runCameraRecognition = () => {
+export const runCameraRecognition = (appActions, userName = "friend") => {
   var arrayOfOldCodes = []; // IDs only
-
   var nothingFoundBefore = false;
 
   // register a callback function with the TopCode library

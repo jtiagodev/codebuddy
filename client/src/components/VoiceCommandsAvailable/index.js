@@ -26,7 +26,7 @@ const VoiceCommandsAvailable = ({ availableVoiceCommands }) => {
       </thead>
       <tbody>
         {_.map(availableVoiceCommands, (voiceCommand, i) => (
-          <tr>
+          <tr key={i}>
             <td>
               <span
                 style={{

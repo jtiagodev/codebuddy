@@ -3,7 +3,7 @@ import { writeBoardToFireBase, boardsRef } from "./firebase";
 import { codeDictionary, anglesDirections } from "./codi";
 import { speak } from "./speechSyntesis";
 
-export const runCameraRecognition = () => {
+export const runCameraRecognition = (appActions, userName = "friend") => {
   var arrayOfOldCodes = []; // IDs only
 
   var nothingFoundBefore = false;
@@ -48,7 +48,7 @@ export const runCameraRecognition = () => {
       });
 
       if (differenceArray.length > 0) {
-        runComputation(topcodes, writeToDatabase);
+        runComputation(topcodes, writeToDatabase, appActions, userName);
       }
 
       // TIA: Updates array with new value read
@@ -81,7 +81,7 @@ export const runCameraRecognition = () => {
 //  |. . . . . .
 //  |. . . . . .
 // (1,1) ------ > 6
-function runComputation(arrayTopCodes, writeToDatabase) {
+function runComputation(arrayTopCodes, writeToDatabase, appActions, userName) {
   var cancelExecution = false;
 
   // CAVEAT reversed X axis markers
@@ -334,8 +334,9 @@ function runComputation(arrayTopCodes, writeToDatabase) {
     writeBoardToFireBase(virtualBoard, boardsRef);
   }
 
-  printVirtualBoard(virtualBoard);
+  let virtualBoardToArray = printVirtualBoard(virtualBoard);
   speak("Valid board found");
+  appActions.setVideoIdentifiedBoard(virtualBoardToArray);
 
   function printVirtualBoard(virtualBoard) {
     _.forEach(virtualBoard, function(line) {
@@ -344,6 +345,7 @@ function runComputation(arrayTopCodes, writeToDatabase) {
         lineArray.push(convertCodeDescriptionIntoASCII(identifiedObject.type));
       });
       console.log(lineArray);
+      return lineArray;
     });
   }
 }

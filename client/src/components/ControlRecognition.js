@@ -3,6 +3,7 @@ import { Button, ButtonGroup } from "react-bootstrap";
 import { runCameraRecognition as mapRecognition } from "../lib/maprecognition";
 import { runCameraRecognition as solutionRecognition } from "../lib/solutionrecognition";
 import { speak } from "../lib/speechSyntesis";
+import appActions from "../lib/appActions";
 
 import { executeRobot } from "../lib/execution";
 import { useStateValue } from "../components/StateManagement";
@@ -21,7 +22,7 @@ const ControlRecognition = () => {
           });
 
           speak("Recognizing Commands...");
-          solutionRecognition();
+          solutionRecognition(appActions(dispatch));
         }}
       >
         <span style={{ fontFamily: "Delius Swash Caps" }}>
@@ -37,7 +38,7 @@ const ControlRecognition = () => {
             camera: "Recognizing board"
           });
           speak("Recognizing Board...");
-          mapRecognition();
+          mapRecognition(appActions(dispatch));
         }}
       >
         <span style={{ fontFamily: "Delius Swash Caps" }}>Recognize Board</span>

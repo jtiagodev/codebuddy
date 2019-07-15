@@ -14,6 +14,7 @@ import SystemStatus from "../SystemStatus";
 import VideoCanvas from "../VideoCanvas";
 import VideoModule from "../VideoModule";
 import VoiceModule from "../VoiceModule";
+import appActions from "../../lib/appActions";
 
 import { runCameraRecognition as mapRecognition } from "../../lib/maprecognition";
 import { speak } from "../../lib/speechSyntesis";
@@ -46,152 +47,13 @@ const Codi = () => {
     speak("Hello. I'm Kodi, let's learn to code together. What's your name?");
     // setTimeout(() => {}, 5000);
 
-    const appActions = dispatch => {
-      const setVoiceLastcommandDetected = lastCommandIdentified => {
-        dispatch({
-          type: "SET_VOICE_LASTCOMMANDDETECTED",
-          lastCommandIdentified
-        });
-      };
-
-      const setVoiceCommandAccuracy = lastCommandAccuracy => {
-        dispatch({
-          type: "SET_VOICE_LASTCOMMANDACCURACY",
-          lastCommandAccuracy
-        });
-      };
-
-      const setSystemVoiceStatus = voice => {
-        dispatch({
-          type: "SET_SYSTEM_VOICE",
-          voice
-        });
-      };
-
-      const setVoiceStatisticsSuccess = () => {
-        dispatch({
-          type: "SET_VOICE_STATISTICS_SUCCESS"
-        });
-      };
-
-      const setVoiceStatisticsFailure = () => {
-        dispatch({
-          type: "SET_VOICE_STATISTICS_FAILURE"
-        });
-      };
-
-      const setUsername = userName => {
-        dispatch({
-          type: "SET_USERNAME",
-          userName
-        });
-      };
-
-      const setStatus = status => {
-        dispatch({
-          type: "SET_STATUS",
-          status
-        });
-      };
-
-      const setSystemCameraStatus = camera => {
-        dispatch({
-          type: "SET_SYSTEM_CAMERA",
-          camera
-        });
-      };
-
-      const setSystemRobotStatus = robot => {
-        dispatch({
-          type: "SET_SYSTEM_ROBOT",
-          robot
-        });
-      };
-
-      const setConfigBoardSelected = boardSelected => {
-        dispatch({
-          type: "SET_CONFIG_BOARDSELECTED",
-          boardSelected
-        });
-      };
-
-      const setConfigRobotSelected = robotSelected => {
-        dispatch({
-          type: "SET_CONFIG_ROBOTSELECTED",
-          robotSelected
-        });
-      };
-
-      const setConfigBoardSize = boardSize => {
-        dispatch({
-          type: "SET_CONFIG_BOARDSIZE",
-          boardSize
-        });
-      };
-
-      const setConfigAvailableVoiceCommands = availableVoiceCommands => {
-        dispatch({
-          type: "SET_CONFIG_AVAILABLEVOICECOMMANDS",
-          availableVoiceCommands
-        });
-      };
-
-      const setVideoIdentifiedBoard = identifiedBoard => {
-        dispatch({
-          type: "SET_VIDEO_IDENTIFIEDBOARD",
-          identifiedBoard
-        });
-      };
-
-      const setVideoIdentifiedCommands = identifiedCommands => {
-        dispatch({
-          type: "SET_VIDEO_IDENTIFIEDCOMMANDS",
-          identifiedCommands
-        });
-      };
-
-      const setVideoCommandsInterfaceGroup1 = commandsInterfaceGroup1 => {
-        dispatch({
-          type: "SET_VIDEO_COMMANDSINTERFACEGROUP1",
-          commandsInterfaceGroup1
-        });
-      };
-
-      const setExecuted = executed => {
-        dispatch({
-          type: "SET_EXECUTED",
-          executed
-        });
-      };
-
-      return {
-        setExecuted,
-        setVoiceLastcommandDetected,
-        setVoiceCommandAccuracy,
-        setSystemVoiceStatus,
-        setVoiceStatisticsSuccess,
-        setVoiceStatisticsFailure,
-        setUsername,
-        setStatus,
-        setSystemCameraStatus,
-        setSystemRobotStatus,
-        setConfigBoardSelected,
-        setConfigRobotSelected,
-        setConfigBoardSize,
-        setConfigAvailableVoiceCommands,
-        setVideoIdentifiedBoard,
-        setVideoIdentifiedCommands,
-        setVideoCommandsInterfaceGroup1
-      };
-    };
-
     const startUp = async () => {
       await getUsername()
         .then(res => {
           let userName = res;
           // STARTUP LOGIC GOES HERE
           appActions(dispatch).setUsername(userName);
-          mapRecognition();
+          mapRecognition(appActions(dispatch), userName);
           appActions(dispatch).setSystemCameraStatus("recognizing board");
           startSpeechFunction(appActions(dispatch), userName);
           appActions(dispatch).setSystemVoiceStatus("listening...");
@@ -212,7 +74,7 @@ const Codi = () => {
         <CameraBlocksDetection>
           <VideoCanvas />
         </CameraBlocksDetection>
-        <SystemStatus />
+        <SystemStatus appActions={appActions(dispatch)} />
       </OneThirdFlex>
       <TwoThirdsFlex>
         <VoiceModule />
