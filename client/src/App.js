@@ -16,6 +16,7 @@ import VideoModule from "./components/VideoModule";
 import VoiceModule from "./components/VoiceModule";
 import Codi from "./components/Codi";
 import "./App.css";
+import DashImgSrc from "./images/dash.png";
 
 const App = () => {
   // console.log("APP RENDER");
@@ -24,7 +25,13 @@ const App = () => {
     <div className="App">
       <StateProvider initialState={initialState} reducer={reducer}>
         <Codi />
+
         <Footer />
+        <img
+          style={{ width: "250px" }}
+          src={DashImgSrc}
+          className="robotFixedPosition"
+        />
       </StateProvider>
     </div>
   );

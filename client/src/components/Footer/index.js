@@ -6,7 +6,7 @@ import { Flex, Box } from "../Grid";
 const FooterContainer = styled(Flex)`
   padding: 0px 5px;
   margin-top: 10px;
-  background-color: white;
+  background-color: #edff8f;
   position: fixed;
   bottom: 0px;
   left: 0px;
@@ -16,6 +16,7 @@ const FooterContainer = styled(Flex)`
 `;
 
 const CopyrightText = styled(Box)`
+  font-family: Bubblegum Sans
   font-size: 12px;
   color: black;
   justify-self: center;
