@@ -26,7 +26,7 @@ const statusRenderer = status => {
   }
 };
 
-const StatusPanel = ({ userName, status, voice, camera }) => {
+const StatusPanel = ({ userName, status, voice, camera, executed }) => {
   return (
     <>
       <span
@@ -41,8 +41,27 @@ const StatusPanel = ({ userName, status, voice, camera }) => {
       <span style={{ fontFamily: "Delius Swash Caps", color: "black" }}>
         Video Recognition is {statusRenderer(camera.toLowerCase())}
       </span>
-      <br />
       <ControlRecognition />
+      {executed !== "" && (
+        <span
+          style={{
+            fontFamily: "Delius Swash Caps",
+            fontSize: "10px",
+            color: "black"
+          }}
+        >
+          Executed...{" "}
+          <span
+            style={{
+              fontFamily: "Delius Swash Caps",
+              fontSize: "10px",
+              color: "darkgreen"
+            }}
+          >
+            {executed}
+          </span>
+        </span>
+      )}
     </>
   );
 };

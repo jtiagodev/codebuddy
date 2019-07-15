@@ -5,7 +5,11 @@ import { runCameraRecognition as mapRecognition } from "../lib/maprecognition";
 import { runCameraRecognition as solutionRecognition } from "../lib/solutionrecognition";
 import { executeRobot } from "../lib/execution";
 
-export const startSpeechFunction = (appActions, nickname) => {
+export const startSpeechFunction = (
+  appActions,
+  userName,
+  identifiedCommands
+) => {
   // Import Web Speech API
   let SpeechRecognition =
     window.SpeechRecognition || window.webkitSpeechRecognition;
@@ -82,9 +86,9 @@ export const startSpeechFunction = (appActions, nickname) => {
 
       appActions.setVoiceStatisticsSuccess();
 
-      executeRobot();
+      executeRobot(appActions, identifiedCommands, (gameMode = "Maze"));
     } else if (speechResult.toLowerCase().match(voiceCommandsRegex.thankYou)) {
-      speak(`You are welcome ${nickname}!`);
+      speak(`You are welcome ${userName}!`);
 
       appActions.setVoiceStatisticsSuccess();
     } else if (speechResult.toLowerCase().match(voiceCommandsRegex.whoAreYou)) {
@@ -97,7 +101,7 @@ export const startSpeechFunction = (appActions, nickname) => {
     } else if (
       speechResult.toLowerCase().match(voiceCommandsRegex.saveMapToDatabase)
     ) {
-      speak(`Saving Map to Database, ${nickname}`);
+      speak(`Saving Map to Database, ${userName}`);
 
       appActions.setVoiceStatisticsSuccess();
     } else if (
@@ -105,7 +109,7 @@ export const startSpeechFunction = (appActions, nickname) => {
         .toLowerCase()
         .match(voiceCommandsRegex.saveSolutionToDatabase)
     ) {
-      speak(`Saving Commands to Database, ${nickname}`);
+      speak(`Saving Commands to Database, ${userName}`);
 
       appActions.setVoiceStatisticsSuccess();
     } else {

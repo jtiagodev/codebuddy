@@ -18,9 +18,7 @@ export const initialState = {
   },
   executed: "",
   config: {
-    gameMode: {
-      1: "Maze"
-    },
+    gameMode: "Maze",
     boardSelected: {},
     robotSelected: {
       name: "WonderWorks DASH",

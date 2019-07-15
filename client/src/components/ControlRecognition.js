@@ -9,18 +9,15 @@ import { executeRobot } from "../lib/execution";
 import { useStateValue } from "../components/StateManagement";
 
 const ControlRecognition = () => {
-  const [state, dispatch] = useStateValue();
-
+  const [{ config, video }, dispatch] = useStateValue();
+  const { gameMode } = config;
+  const { identifiedCommands } = video;
   return (
     <ButtonGroup>
       <Button
         id="Commands"
         onClick={() => {
-          dispatch({
-            type: "SET_SYSTEM_CAMERA",
-            camera: "Recognizing commands"
-          });
-
+          appActions.setSystemCameraStatus("Recognizing Commands");
           speak("Recognizing Commands...");
           solutionRecognition(appActions(dispatch));
         }}
@@ -33,10 +30,7 @@ const ControlRecognition = () => {
       <Button
         id="Map"
         onClick={event => {
-          dispatch({
-            type: "SET_SYSTEM_CAMERA",
-            camera: "Recognizing board"
-          });
+          appActions.setSystemCameraStatus("Recognizing Board");
           speak("Recognizing Board...");
           mapRecognition(appActions(dispatch));
         }}
@@ -48,11 +42,7 @@ const ControlRecognition = () => {
         variant="success"
         id="Robot"
         onClick={event => {
-          dispatch({
-            type: "SET_STATUS",
-            camera: "Executing Commands"
-          });
-          executeRobot();
+          executeRobot(appActions(dispatch), identifiedCommands, gameMode);
         }}
       >
         <span style={{ fontFamily: "Delius Swash Caps" }}>

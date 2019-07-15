@@ -1,9 +1,16 @@
 import axios from "axios";
 
-export const executeRobot = async () => {
+export const executeRobot = async (
+  appActions,
+  identifiedCommands = [],
+  gameMode = "Maze"
+) => {
+  let command = `python robotsInterfaceScript.py ${gameMode} ${identifiedCommands}`;
+  appActions.setExecuted(command);
+
   try {
     return await axios.post("http://localhost:3001/execute", {
-      command: "python robotsInterfaceScript.py [23,23,23,23]"
+      command
     });
   } catch (error) {
     console.error(error);

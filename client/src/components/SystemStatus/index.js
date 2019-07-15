@@ -54,7 +54,7 @@ const Wrapper = styled(Flex)`
 // };
 
 const SystemStatus = ({ children }) => {
-  const [{ userName, status, system }, dispatch] = useStateValue();
+  const [{ userName, status, system, executed }, dispatch] = useStateValue();
   const { voice, camera } = system;
 
   return (
@@ -63,6 +63,7 @@ const SystemStatus = ({ children }) => {
       {children}
 
       <StatusPanel
+        executed={executed}
         userName={userName}
         status={status}
         voice={voice}

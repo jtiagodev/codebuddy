@@ -40,7 +40,8 @@ const TwoThirdsFlex = styled(Flex)`
 `;
 
 const Codi = () => {
-  const [state, dispatch] = useStateValue();
+  const [{ video }, dispatch] = useStateValue();
+  const { identifiedCommands } = video;
 
   useEffect(() => {
     console.log("USEEFFECT - STARTUP");
@@ -55,7 +56,11 @@ const Codi = () => {
           appActions(dispatch).setUsername(userName);
           mapRecognition(appActions(dispatch), userName);
           appActions(dispatch).setSystemCameraStatus("recognizing board");
-          startSpeechFunction(appActions(dispatch), userName);
+          startSpeechFunction(
+            appActions(dispatch),
+            userName,
+            identifiedCommands
+          );
           appActions(dispatch).setSystemVoiceStatus("listening...");
           appActions(dispatch).setStatus("online");
           window.TopCodes.startStopVideoScan("video-canvas");
