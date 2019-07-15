@@ -338,16 +338,19 @@ function runComputation(arrayTopCodes, writeToDatabase, appActions, userName) {
 
   let virtualBoardToArray = printVirtualBoard(virtualBoard);
   speak("Valid board found");
-  appActions.setVideoIdentifiedBoard(virtualBoardToArray);
 
   function printVirtualBoard(virtualBoard) {
+    var printedVirtualBoard = [];
     _.forEach(virtualBoard, function(line) {
       var lineArray = [];
+      printedVirtualBoard.push(lineArray);
       _.forEach(line, function(identifiedObject) {
         lineArray.push(convertCodeDescriptionIntoASCII(identifiedObject.type));
       });
-      console.log(lineArray);
-      return lineArray;
     });
+
+    console.log(printedVirtualBoard);
+    appActions.setVideoIdentifiedBoard(printedVirtualBoard);
+    return printVirtualBoard;
   }
 }

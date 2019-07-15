@@ -17,7 +17,7 @@ const ControlRecognition = () => {
       <Button
         id="Commands"
         onClick={() => {
-          appActions.setSystemCameraStatus("Recognizing Commands");
+          appActions(dispatch).setSystemCameraStatus("Recognizing Commands");
           speak("Recognizing Commands...");
           solutionRecognition(appActions(dispatch));
         }}
@@ -30,7 +30,7 @@ const ControlRecognition = () => {
       <Button
         id="Map"
         onClick={event => {
-          appActions.setSystemCameraStatus("Recognizing Board");
+          appActions(dispatch).setSystemCameraStatus("Recognizing Board");
           speak("Recognizing Board...");
           mapRecognition(appActions(dispatch));
         }}

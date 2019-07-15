@@ -17,7 +17,6 @@ const VideoPanel = ({
 
   return (
     <Flex flexDirection="column">
-      {/* <Flex flexDirection="column"> */}
       <span style={{ fontFamily: "Delius Swash Caps", color: "black" }}>
         Codes Identified:{" "}
         <span style={{ fontFamily: "Delius Swash Caps", color: "black" }}>
@@ -45,20 +44,19 @@ const VideoPanel = ({
         </span>
       </span>
 
-      {/* </Flex> */}
-
-      {/* <Flex flexDirection="column"> */}
       <span style={{ fontFamily: "Delius Swash Caps", color: "black" }}>
         Board Identified:
       </span>
-      {_.map(identifiedBoard, (boardRow, i) => {
-        return (
-          <span style={{ fontSize: "10px" }} key={i}>
-            {JSON.stringify(boardRow)}
-          </span>
-        );
-      })}
-      {/* </Flex> */}
+      {identifiedBoard.length > 0 &&
+        _.map(identifiedBoard, (boardRow, i) => {
+          console.log(identifiedBoard);
+          console.log(boardRow);
+          return (
+            <span style={{ fontSize: "10px" }} key={i}>
+              {JSON.stringify(boardRow)}
+            </span>
+          );
+        })}
     </Flex>
   );
 };

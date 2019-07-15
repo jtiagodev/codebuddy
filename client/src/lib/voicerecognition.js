@@ -70,7 +70,7 @@ export const startSpeechFunction = (
 
       appActions.setVoiceStatisticsSuccess();
 
-      mapRecognition();
+      mapRecognition(appActions);
     } else if (
       speechResult.toLowerCase().match(voiceCommandsRegex.recognizeSolution)
     ) {
@@ -78,7 +78,7 @@ export const startSpeechFunction = (
 
       appActions.setVoiceStatisticsSuccess();
 
-      solutionRecognition();
+      solutionRecognition(appActions);
     } else if (
       speechResult.toLowerCase().match(voiceCommandsRegex.executeSolution)
     ) {

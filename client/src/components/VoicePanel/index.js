@@ -34,7 +34,8 @@ const VoicePanel = ({
               data={{
                 datasets: [
                   {
-                    data: [recognized, unrecognized]
+                    data: [recognized, unrecognized],
+                    backgroundColor: ["darkgreen", "darkred"]
                   }
                 ],
 
