@@ -6,6 +6,8 @@ import { Flex } from "../Grid";
 import DefaultBoards from "../DefaultBoards";
 import { useStateValue } from "../StateManagement";
 import VoicePanel from "../VoicePanel";
+import _ from "lodash";
+import VoiceCommandsAvailable from "../VoiceCommandsAvailable";
 
 const Wrapper = styled(Flex)`
   background: #84ff9f;
@@ -17,8 +19,9 @@ const Wrapper = styled(Flex)`
 `;
 
 const VoiceModule = ({ children }) => {
-  const [{ voice }, dispatch] = useStateValue();
+  const [{ voice, config }, dispatch] = useStateValue();
   const { lastCommandAccuracy, lastCommandIdentified, statistics } = voice;
+  const { availableVoiceCommands } = config;
 
   return (
     <Wrapper alignItems="start" flexDirection="column">
@@ -26,11 +29,17 @@ const VoiceModule = ({ children }) => {
 
       <BoxTitle icon="feed" title="VOICE MODULE" />
 
-      <VoicePanel
-        lastCommandIdentified={lastCommandIdentified}
-        lastCommandAccuracy={lastCommandAccuracy}
-        statistics={statistics}
-      />
+      <Flex flexDirection="row">
+        <VoicePanel
+          lastCommandIdentified={lastCommandIdentified}
+          lastCommandAccuracy={lastCommandAccuracy}
+          statistics={statistics}
+        />
+
+        <VoiceCommandsAvailable
+          availableVoiceCommands={availableVoiceCommands}
+        />
+      </Flex>
     </Wrapper>
   );
 };

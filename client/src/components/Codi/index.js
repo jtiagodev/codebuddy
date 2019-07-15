@@ -87,10 +87,10 @@ const Codi = () => {
         });
       };
 
-      const setStatus = userName => {
+      const setStatus = status => {
         dispatch({
           type: "SET_STATUS",
-          userName
+          status
         });
       };
 
@@ -157,7 +157,15 @@ const Codi = () => {
         });
       };
 
+      const setExecuted = executed => {
+        dispatch({
+          type: "SET_EXECUTED",
+          executed
+        });
+      };
+
       return {
+        setExecuted,
         setVoiceLastcommandDetected,
         setVoiceCommandAccuracy,
         setSystemVoiceStatus,
@@ -177,14 +185,11 @@ const Codi = () => {
       };
     };
 
-    // let userName = "friend";
-
     const startUp = async () => {
       await getUsername()
         .then(res => {
           let userName = res;
           // STARTUP LOGIC GOES HERE
-
           appActions(dispatch).setUsername(userName);
           mapRecognition();
           appActions(dispatch).setSystemCameraStatus("recognizing board");
@@ -199,7 +204,7 @@ const Codi = () => {
     };
 
     startUp();
-  }, [dispatch]);
+  }, []);
 
   return (
     <Body>

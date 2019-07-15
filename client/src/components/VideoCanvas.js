@@ -6,7 +6,7 @@ const VideoCanvas = () => {
       id="video-canvas"
       width="800"
       height="600"
-      style={{ width: "600px", height: "450px", background: "#ddd" }}
+      style={{ width: "535px", height: "400px", background: "#ddd" }}
     />
   );
 };

@@ -16,6 +16,7 @@ export const initialState = {
     camera: "OFFLINE", // Recognizing Board, Recognizing Commands, Offline
     robot: "OFFLINE" // Executing | Ready | Offline
   },
+  executed: "",
   config: {
     gameMode: {
       1: "Maze"
@@ -26,45 +27,45 @@ export const initialState = {
       compatibleCommands: {}
     },
     boardSize: 6,
-    availableVoiceCommands: {
-      1: {
+    availableVoiceCommands: [
+      {
         command: "Read Commands",
         format: "(what is|read) (this|the)? (solution|sequence)"
       },
-      2: {
+      {
         command: "What is This Block?",
         format: "(what is|what's) (this|that)"
       },
-      3: {
+      {
         command: "Compute Commands",
         format: "(compute|check|verify) (solution|sequence)"
       },
-      4: {
+      {
         command: "Recognize Board",
         format: "(recognize) (board|map)"
       },
-      5: {
+      {
         command: "Recognize Commands",
         format: "(recognize) (solution|sequence)"
       },
-      6: {
+      {
         command: "Execute Commands",
         format:
           "(go|start|execute) (solution|sequence) (codi|kodi|buddy|cody|robot)"
       },
-      7: {
+      {
         command: "Save Board to Database",
         format: "(save|send) (map|board)"
       },
-      8: {
+      {
         command: "Save Board to Database",
         format: "(save|send) (map|board)"
       },
-      9: {
+      {
         command: "Save Board to Database",
         format: "(save|send) (solution|sequence)"
       }
-    }
+    ]
   },
   voice: {
     lastCommandIdentified: "",
@@ -83,6 +84,12 @@ export const initialState = {
 
 export const reducer = (state, action) => {
   switch (action.type) {
+    case "SET_EXECUTED":
+      return {
+        ...state,
+        executed: action.executed
+      };
+
     case "SET_USERNAME":
       return {
         ...state,
