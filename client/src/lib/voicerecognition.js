@@ -5,12 +5,7 @@ import { runCameraRecognition as mapRecognition } from "../lib/maprecognition";
 import { runCameraRecognition as solutionRecognition } from "../lib/solutionrecognition";
 import { executeRobot } from "../lib/execution";
 
-export const startSpeechFunction = (
-  setVoiceLastcommandDetected,
-  setVoiceCommandAccuracy,
-  setSystemVoiceStatus,
-  nickname
-) => {
+export const startSpeechFunction = (appActions, nickname) => {
   // Import Web Speech API
   let SpeechRecognition =
     window.SpeechRecognition || window.webkitSpeechRecognition;
@@ -32,7 +27,7 @@ export const startSpeechFunction = (
   recognition.start();
 
   recognition.onresult = function(event) {
-    setSystemVoiceStatus("listening...");
+    appActions.setSystemVoiceStatus("listening...");
 
     // The SpeechRecognitionEvent results property returns a SpeechRecognitionResultList object
     // The SpeechRecognitionResultList object contains SpeechRecognitionResult objects.
@@ -45,36 +40,31 @@ export const startSpeechFunction = (
     let speechResult = event.results[0][0].transcript.toLowerCase();
     let confidenceResult = Math.round(event.results[0][0].confidence * 100);
 
+    appActions.setVoiceLastcommandDetected(speechResult);
+    appActions.setVoiceCommandAccuracy(confidenceResult);
+
     if (speechResult.toLowerCase().match(voiceCommandsRegex.readSolution)) {
       speak("Reading Solution....");
 
-      setVoiceLastcommandDetected(speechResult);
-      setVoiceCommandAccuracy(confidenceResult);
-      //setVoiceStatisticsSuccess();
+      appActions.setVoiceStatisticsSuccess();
     } else if (
       speechResult.toLowerCase().match(voiceCommandsRegex.whatIsThis)
     ) {
       speak("This is... well i haven't been coded for identifying that yet");
 
-      setVoiceLastcommandDetected(speechResult);
-      setVoiceCommandAccuracy(confidenceResult);
-      //setVoiceStatisticsSuccess();
+      appActions.setVoiceStatisticsSuccess();
     } else if (
       speechResult.toLowerCase().match(voiceCommandsRegex.computeSequence)
     ) {
       speak("Computing Commands...");
 
-      setVoiceLastcommandDetected(speechResult);
-      setVoiceCommandAccuracy(confidenceResult);
-      //setVoiceStatisticsSuccess();
+      appActions.setVoiceStatisticsSuccess();
     } else if (
       speechResult.toLowerCase().match(voiceCommandsRegex.recognizeBoard)
     ) {
       speak("Recognizing Board");
 
-      setVoiceLastcommandDetected(speechResult);
-      setVoiceCommandAccuracy(confidenceResult);
-      //setVoiceStatisticsSuccess();
+      appActions.setVoiceStatisticsSuccess();
 
       mapRecognition();
     } else if (
@@ -82,9 +72,7 @@ export const startSpeechFunction = (
     ) {
       speak("Recognizing Commands");
 
-      setVoiceLastcommandDetected(speechResult);
-      setVoiceCommandAccuracy(confidenceResult);
-      //setVoiceStatisticsSuccess();
+      appActions.setVoiceStatisticsSuccess();
 
       solutionRecognition();
     } else if (
@@ -92,35 +80,26 @@ export const startSpeechFunction = (
     ) {
       speak("Executing Commands");
 
-      setVoiceLastcommandDetected(speechResult);
-      setVoiceCommandAccuracy(confidenceResult);
-      //setVoiceStatisticsSuccess();
+      appActions.setVoiceStatisticsSuccess();
 
       executeRobot();
     } else if (speechResult.toLowerCase().match(voiceCommandsRegex.thankYou)) {
       speak(`You are welcome ${nickname}!`);
 
-      setVoiceLastcommandDetected(speechResult);
-      setVoiceCommandAccuracy(confidenceResult);
-      //setVoiceStatisticsSuccess();
+      appActions.setVoiceStatisticsSuccess();
     } else if (speechResult.toLowerCase().match(voiceCommandsRegex.whoAreYou)) {
       let phrases = [
         "I'm a cybernetic organism and i'm here to kill John Connor",
         "My real name is TRON..."
       ];
       speak(phrases[Math.round(Math.random())]);
-
-      setVoiceLastcommandDetected(speechResult);
-      setVoiceCommandAccuracy(confidenceResult);
-      //setVoiceStatisticsSuccess();
+      appActions.setVoiceStatisticsSuccess();
     } else if (
       speechResult.toLowerCase().match(voiceCommandsRegex.saveMapToDatabase)
     ) {
       speak(`Saving Map to Database, ${nickname}`);
 
-      setVoiceLastcommandDetected(speechResult);
-      setVoiceCommandAccuracy(confidenceResult);
-      //setVoiceStatisticsSuccess();
+      appActions.setVoiceStatisticsSuccess();
     } else if (
       speechResult
         .toLowerCase()
@@ -128,11 +107,9 @@ export const startSpeechFunction = (
     ) {
       speak(`Saving Commands to Database, ${nickname}`);
 
-      setVoiceLastcommandDetected(speechResult);
-      setVoiceCommandAccuracy(confidenceResult);
-      //setVoiceStatisticsSuccess();
+      appActions.setVoiceStatisticsSuccess();
     } else {
-      //setVoiceStatisticsFailure();
+      appActions.setVoiceStatisticsFailure();
     }
   };
 
@@ -154,8 +131,7 @@ export const startSpeechFunction = (
     //Fired when the speech recognition service has disconnected.
     ////console.log("SpeechRecognition.onend");
 
-    let voiceStatus = document.querySelector(".voice-status");
-    setSystemVoiceStatus("listening...");
+    appActions.setSystemVoiceStatus("listening...");
     // Emulates Continuous Speech Recognition
     recognition.stop();
     recognition.start();
@@ -180,7 +156,7 @@ export const startSpeechFunction = (
     //Fired when sound that is recognised by the speech recognition service as speech has been detected.
     ////console.log("SpeechRecognition.onspeechstart");
     // let voiceStatus = document.querySelector(".voice-status");
-    setSystemVoiceStatus("processing...");
+    appActions.setSystemVoiceStatus("processing...");
   };
   recognition.onstart = function(event) {
     //Fired when the speech recognition service has begun listening to incoming audio with intent to recognize grammars associated with the current SpeechRecognition.

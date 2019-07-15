@@ -27,19 +27,20 @@ const VoicePanel = ({
       )}
 
       {lastCommandIdentified !== "" && (
-        <Doughnut
-          width={150}
-          data={{
-            datasets: [
-              {
-                data: [recognized, unrecognized]
-              }
-            ],
+        <div style={{ width: "250px" }}>
+          <Doughnut
+            data={{
+              datasets: [
+                {
+                  data: [recognized, unrecognized]
+                }
+              ],
 
-            // These labels appear in the legend and in the tooltips when hovering different arcs
-            labels: ["Valid Intent", "Invalid Intent"]
-          }}
-        />
+              // These labels appear in the legend and in the tooltips when hovering different arcs
+              labels: ["Valid Intent", "Invalid Intent"]
+            }}
+          />
+        </div>
       )}
     </>
   );

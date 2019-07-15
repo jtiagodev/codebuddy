@@ -41,75 +41,156 @@ const TwoThirdsFlex = styled(Flex)`
 const Codi = () => {
   const [state, dispatch] = useStateValue();
 
+  const appActions = dispatch => {
+    const setVoiceLastcommandDetected = lastCommandIdentified => {
+      dispatch({
+        type: "SET_VOICE_LASTCOMMANDDETECTED",
+        lastCommandIdentified
+      });
+    };
+
+    const setVoiceCommandAccuracy = lastCommandAccuracy => {
+      dispatch({
+        type: "SET_VOICE_LASTCOMMANDACCURACY",
+        lastCommandAccuracy
+      });
+    };
+
+    const setSystemVoiceStatus = voice => {
+      dispatch({
+        type: "SET_SYSTEM_VOICE",
+        voice
+      });
+    };
+
+    const setVoiceStatisticsSuccess = () => {
+      dispatch({
+        type: "SET_VOICE_STATISTICS_SUCCESS"
+      });
+    };
+
+    const setVoiceStatisticsFailure = () => {
+      dispatch({
+        type: "SET_VOICE_STATISTICS_FAILURE"
+      });
+    };
+
+    const setUsername = userName => {
+      dispatch({
+        type: "SET_USERNAME",
+        userName
+      });
+    };
+
+    const setStatus = userName => {
+      dispatch({
+        type: "SET_STATUS",
+        userName
+      });
+    };
+
+    const setSystemCameraStatus = camera => {
+      dispatch({
+        type: "SET_SYSTEM_CAMERA",
+        camera
+      });
+    };
+
+    const setSystemRobotStatus = robot => {
+      dispatch({
+        type: "SET_SYSTEM_ROBOT",
+        robot
+      });
+    };
+
+    const setConfigBoardSelected = boardSelected => {
+      dispatch({
+        type: "SET_CONFIG_BOARDSELECTED",
+        boardSelected
+      });
+    };
+
+    const setConfigRobotSelected = robotSelected => {
+      dispatch({
+        type: "SET_CONFIG_ROBOTSELECTED",
+        robotSelected
+      });
+    };
+
+    const setConfigBoardSize = boardSize => {
+      dispatch({
+        type: "SET_CONFIG_BOARDSIZE",
+        boardSize
+      });
+    };
+
+    const setConfigAvailableVoiceCommands = availableVoiceCommands => {
+      dispatch({
+        type: "SET_CONFIG_AVAILABLEVOICECOMMANDS",
+        availableVoiceCommands
+      });
+    };
+
+    const setVideoIdentifiedBoard = identifiedBoard => {
+      dispatch({
+        type: "SET_VIDEO_IDENTIFIEDBOARD",
+        identifiedBoard
+      });
+    };
+
+    const setVideoIdentifiedCommands = identifiedCommands => {
+      dispatch({
+        type: "SET_VIDEO_IDENTIFIEDCOMMANDS",
+        identifiedCommands
+      });
+    };
+
+    const setVideoCommandsInterfaceGroup1 = commandsInterfaceGroup1 => {
+      dispatch({
+        type: "SET_VIDEO_COMMANDSINTERFACEGROUP1",
+        commandsInterfaceGroup1
+      });
+    };
+
+    return {
+      setVoiceLastcommandDetected,
+      setVoiceCommandAccuracy,
+      setSystemVoiceStatus,
+      setVoiceStatisticsSuccess,
+      setVoiceStatisticsFailure,
+      setUsername,
+      setStatus,
+      setSystemCameraStatus,
+      setSystemRobotStatus,
+      setConfigBoardSelected,
+      setConfigRobotSelected,
+      setConfigBoardSize,
+      setConfigAvailableVoiceCommands,
+      setVideoIdentifiedBoard,
+      setVideoIdentifiedCommands,
+      setVideoCommandsInterfaceGroup1
+    };
+  };
+
   useEffect(() => {
     console.log("USEEFFECT - STARTUP");
     speak("Hello. I'm Kodi, let's learn to code together. What's your name?");
     setTimeout(() => {}, 5000);
 
+    // let userName = "friend";
+
     const startUp = async () => {
       await getUsername()
         .then(res => {
-          // const setVoiceStatisticsFailure = () => {
-          //   dispatch({
-          //     type: "SET_VOICE_STATISTICS_FAILURE",
-          //     payload: ""
-          //   });
-          // };
+          let userName = res;
+          // STARTUP LOGIC GOES HERE
 
-          // const setVoiceStatisticsSuccess = () => {
-          //   dispatch({
-          //     type: "SET_VOICE_STATISTICS_SUCCESS",
-          //     payload: ""
-          //   });
-          // };
-
-          const setVoiceLastcommandDetected = lastCommandIdentified => {
-            dispatch({
-              type: "SET_VOICE_LASTCOMMANDDETECTED",
-              lastCommandIdentified
-            });
-          };
-
-          const setVoiceCommandAccuracy = lastCommandAccuracy => {
-            dispatch({
-              type: "SET_VOICE_LASTCOMMANDACCURACY",
-              lastCommandAccuracy
-            });
-          };
-          const setSystemVoiceStatus = voice => {
-            dispatch({
-              type: "SET_SYSTEM_VOICE",
-              voice
-            });
-          };
-
-          dispatch({
-            type: "SET_USERNAME",
-            userName: res
-          });
-          // executeRobot();
+          appActions.setUsername(userName);
           mapRecognition();
-          dispatch({
-            type: "SET_SYSTEM_CAMERA",
-            camera: "recognizing board"
-          });
-
-          startSpeechFunction(
-            setVoiceLastcommandDetected,
-            setVoiceCommandAccuracy,
-            setSystemVoiceStatus,
-            res
-          );
-          dispatch({
-            type: "SET_SYSTEM_VOICE",
-            voice: "LISTENING..."
-          });
-
-          dispatch({
-            type: "SET_STATUS",
-            status: "online"
-          });
-
+          appActions.setSystemCameraStatus("recognizing board");
+          startSpeechFunction(appActions(dispatch), userName);
+          appActions.setSystemVoiceStatus("listening...");
+          appActions.setStatus("online");
           window.TopCodes.startStopVideoScan("video-canvas");
         })
         .catch(err => {
