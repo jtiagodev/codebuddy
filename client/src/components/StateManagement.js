@@ -10,7 +10,7 @@ export const useStateValue = () => useContext(StateContext);
 
 export const initialState = {
   userName: "friend",
-  status: "Initializing",
+  status: "Initializing...",
   system: {
     voice: "OFFLINE", // Listening | Processing
     camera: "OFFLINE", // Recognizing Board, Recognizing Commands, Offline

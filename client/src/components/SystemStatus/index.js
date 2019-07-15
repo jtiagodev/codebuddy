@@ -3,12 +3,8 @@ import React from "react";
 import styled from "styled-components";
 import BoxTitle from "../BoxTitle";
 import { Flex } from "../Grid";
-import LinksDef from "./links";
 import { useStateValue } from "../StateManagement";
-import ControlRecognition from "../ControlRecognition";
-
-import { executeRobot } from "../../lib/execution";
-import { Button } from "react-bootstrap";
+import StatusPanel from "../StatusPanel";
 
 const Wrapper = styled(Flex)`
   background: #ff9668;
@@ -57,7 +53,9 @@ const Wrapper = styled(Flex)`
 //   this.setState(this.state);
 // };
 
-const SystemStatus = ({ userName, status, system, children }) => {
+const SystemStatus = ({ children }) => {
+  const [{ userName, status, system }, dispatch] = useStateValue();
+  const { voice, camera } = system;
   // const renderStatus = status => {
   //   switch (status) {
   //     case "ONLINE":
@@ -76,20 +74,16 @@ const SystemStatus = ({ userName, status, system, children }) => {
   // };
 
   return (
-    <Wrapper className="bp3-dark" flexDirection="column">
+    <Wrapper className="bp3-dark" alignItems="start" flexDirection="column">
       <BoxTitle icon="dashboard" title="SYSTEM STATUS" />
       {children}
 
-      <span>{`HELLO ${userName}`}</span>
-      <span>SYSTEM: {status.toUpperCase()}</span>
-      <span>VOICE RECOGNITION: {system.voice.toUpperCase()}</span>
-      <span>VIDEO RECOGNITION: {system.camera.toUpperCase()}</span>
-      <br />
-      <ControlRecognition />
-      <br />
-      <div onClick={() => executeRobot()}>
-        <Button variant="primary">EXECUTE</Button>
-      </div>
+      <StatusPanel
+        userName={userName}
+        status={status}
+        voice={voice}
+        camera={camera}
+      />
     </Wrapper>
   );
 };

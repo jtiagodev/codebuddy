@@ -39,14 +39,12 @@ const TwoThirdsFlex = styled(Flex)`
 `;
 
 const Codi = () => {
-  const [{ userName, status, system }, dispatch] = useStateValue();
+  const [state, dispatch] = useStateValue();
 
   useEffect(() => {
     console.log("USEEFFECT - STARTUP");
     speak("Hello. I'm Kodi, let's learn to code together. What's your name?");
-    // Import Web Speech API
-
-    // setTimeout(() => {}, 3000);
+    setTimeout(() => {}, 5000);
 
     const startUp = async () => {
       await getUsername()
@@ -59,13 +57,18 @@ const Codi = () => {
           mapRecognition();
           dispatch({
             type: "SET_SYSTEM_CAMERA",
-            camera: "ONLINE: Recognizing Board"
+            camera: "recognizing board"
           });
 
           startSpeechFunction();
           dispatch({
             type: "SET_SYSTEM_VOICE",
-            voice: "LISTENING"
+            voice: "LISTENING..."
+          });
+
+          dispatch({
+            type: "SET_STATUS",
+            status: "online"
           });
 
           window.TopCodes.startStopVideoScan("video-canvas");
@@ -84,7 +87,7 @@ const Codi = () => {
         <CameraBlocksDetection>
           <VideoCanvas />
         </CameraBlocksDetection>
-        <SystemStatus userName={userName} status={status} system={system} />
+        <SystemStatus />
       </OneThirdFlex>
       <TwoThirdsFlex>
         <VoiceModule />

@@ -211,7 +211,7 @@ export const getUsername = () =>
     recognitionUsername.onspeechend = function() {};
 
     recognitionUsername.onerror = function(event) {
-      reject(event);
+      // reject(event);
     };
 
     recognitionUsername.onaudiostart = function(event) {

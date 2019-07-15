@@ -46,7 +46,7 @@ const cellRendererLink = number => {
 
 const VoiceModule = ({ children }) => {
   return (
-    <Wrapper flexDirection="column">
+    <Wrapper alignItems="start" flexDirection="column">
       {children}
 
       <BoxTitle icon="feed" title="VOICE MODULE" />

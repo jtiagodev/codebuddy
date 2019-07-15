@@ -14,7 +14,7 @@ const Wrapper = styled(Flex)`
 
 const VideoModule = ({ children }) => {
   return (
-    <Wrapper style={{ flexDirection: "column" }}>
+    <Wrapper alignItems="start" style={{ flexDirection: "column" }}>
       <BoxTitle icon="camera" title="VIDEO MODULE" />
       {children}
 

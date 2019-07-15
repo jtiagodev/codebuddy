@@ -26,7 +26,7 @@ const LinkWrapper = styled(Flex)`
 
 const CameraBlocksDetection = ({ children }) => {
   return (
-    <Wrapper flexDirection="column">
+    <Wrapper alignItems="start" flexDirection="column">
       <BoxTitle icon="heat-grid" title="BLOCKS DETECTION" />
       {children}
     </Wrapper>

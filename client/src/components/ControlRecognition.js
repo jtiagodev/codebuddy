@@ -1,52 +1,64 @@
 import React, { useState } from "react";
-import { Button, ButtonGroup } from "@blueprintjs/core";
+import { Button, ButtonGroup } from "react-bootstrap";
 import { runCameraRecognition as mapRecognition } from "../lib/maprecognition";
 import { runCameraRecognition as solutionRecognition } from "../lib/solutionrecognition";
 import { speak } from "../lib/speechSyntesis";
 
+import { executeRobot } from "../lib/execution";
 import { useStateValue } from "../components/StateManagement";
 
-const CurrentlyIdentifying = ({ type }) => {
-  return <span>Currently Identifying {type}</span>;
-};
-
 const ControlRecognition = () => {
-  const [{ theme }, dispatch] = useStateValue();
-
-  const [identifying, setIdentifying] = useState("Solution");
+  const [state, dispatch] = useStateValue();
 
   return (
-    <>
-      <ButtonGroup minimal={true}>
-        <Button
-          id="Solution"
-          icon="code"
-          onClick={() => {
-            dispatch({
-              type: "changeTheme",
-              newTheme: { primary: "blue" }
-            });
+    <ButtonGroup>
+      <Button
+        id="Commands"
+        onClick={() => {
+          dispatch({
+            type: "SET_SYSTEM_CAMERA",
+            camera: "Recognizing commands"
+          });
 
-            speak("Identifying Solution...");
-            solutionRecognition();
-          }}
-        >
+          speak("Recognizing Commands...");
+          solutionRecognition();
+        }}
+      >
+        <span style={{ fontFamily: "Delius Swash Caps" }}>
           Recognize Commands
-        </Button>
-        <Button
-          id="Map"
-          icon="map"
-          onClick={event => {
-            setIdentifying("Map");
-            speak("Identifying Map...");
-            mapRecognition();
-          }}
-        >
-          Recognize Board
-        </Button>
-      </ButtonGroup>
-      <CurrentlyIdentifying type={identifying} />
-    </>
+        </span>
+      </Button>
+
+      <Button
+        id="Map"
+        onClick={event => {
+          dispatch({
+            type: "SET_SYSTEM_CAMERA",
+            camera: "Recognizing board"
+          });
+          speak("Recognizing Board...");
+          mapRecognition();
+        }}
+      >
+        <span style={{ fontFamily: "Delius Swash Caps" }}>Recognize Board</span>
+      </Button>
+
+      <Button
+        variant="success"
+        id="Robot"
+        onClick={event => {
+          dispatch({
+            type: "SET_STATUS",
+            camera: "Executing Commands"
+          });
+          executeRobot();
+        }}
+      >
+        <span style={{ fontFamily: "Delius Swash Caps" }}>
+          Execute Commands
+        </span>
+      </Button>
+    </ButtonGroup>
   );
 };
 export default ControlRecognition;
