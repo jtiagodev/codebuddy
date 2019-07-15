@@ -6,7 +6,7 @@ import { Flex, Box } from "../Grid";
 const FooterContainer = styled(Flex)`
   padding: 0px 5px;
   margin-top: 10px;
-  background-color: #282d35;
+  background-color: white;
   position: fixed;
   bottom: 0px;
   left: 0px;
@@ -16,17 +16,20 @@ const FooterContainer = styled(Flex)`
 `;
 
 const CopyrightText = styled(Box)`
-  font-size: 9px;
-  color: lightgrey;
+  font-size: 12px;
+  color: black;
   justify-self: center;
 `;
 
 const Footer = () => (
   <FooterContainer justifyContent="flex-end">
     <CopyrightText>
-      <a href="https://www.fc.ul.pt">
-        Joao Tiago, Catarina Fitas, Daniel São Pedro @LaSIGE
+      João Tiago, Catarina Fitas, Daniel São Pedro. 2018. LaSIGE, Faculdade de
+      Ciências da Universidade de Lisboa (
+      <a href="https://www.fc.ul.pt" target="_blank">
+        fc.ul.pt
       </a>
+      )
     </CopyrightText>
   </FooterContainer>
 );

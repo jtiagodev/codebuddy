@@ -4,18 +4,18 @@ import { Flex } from "../Grid";
 import BoxTitle from "./../BoxTitle";
 
 const Wrapper = styled(Flex)`
-  background: #27343e;
+  background: #82b6ff;
   height: 45%;
   margin: 0px 2vh 2vh 0px;
   padding: 10px;
   border-radius: 5px;
-  border: 2px solid #232f38;
+  // border: 2px solid #232f38;
 `;
 
 const VideoModule = ({ children }) => {
   return (
     <Wrapper style={{ flexDirection: "column" }}>
-      <BoxTitle icon="history" title="VIDEO MODULE" />
+      <BoxTitle icon="camera" title="VIDEO MODULE" />
       {children}
 
       <p style={{ color: "white" }}>

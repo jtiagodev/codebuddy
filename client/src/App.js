@@ -15,6 +15,7 @@ import VideoCanvas from "./components/VideoCanvas";
 import VideoModule from "./components/VideoModule";
 import VoiceModule from "./components/VoiceModule";
 import Codi from "./components/Codi";
+import "./App.css";
 
 const App = () => {
   // console.log("APP RENDER");

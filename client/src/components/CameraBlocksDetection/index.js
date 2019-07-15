@@ -6,12 +6,12 @@ import { Title, InstallerLink } from "../Typography";
 import BoxTitle from "../BoxTitle";
 
 const Wrapper = styled(Flex)`
-  background: #27343e;
+  background: #ff5994;
   height: 60%;
   margin: 2vh 2vh 0px 2vh;
   padding: 10px;
   border-radius: 5px;
-  border: 2px solid darkblue;
+  // border: 2px solid darkblue;
   opacity: 1;
 `;
 
@@ -27,7 +27,7 @@ const LinkWrapper = styled(Flex)`
 const CameraBlocksDetection = ({ children }) => {
   return (
     <Wrapper flexDirection="column">
-      <BoxTitle icon="cloud-download" title="BLOCKS DETECTION" />
+      <BoxTitle icon="heat-grid" title="BLOCKS DETECTION" />
       {children}
     </Wrapper>
   );

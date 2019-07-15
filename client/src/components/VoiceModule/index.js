@@ -6,12 +6,12 @@ import { Flex } from "../Grid";
 import DefaultBoards from "../DefaultBoards";
 
 const Wrapper = styled(Flex)`
-  background: #27343e;
+  background: #84ff9f;
   height: 45%;
   margin: 2vh 2vh 2vh 0px;
   padding: 10px;
   border-radius: 5px;
-  border: 2px solid #232f38;
+  // border: 2px solid #232f38;
 `;
 
 const data = [
@@ -49,7 +49,7 @@ const VoiceModule = ({ children }) => {
     <Wrapper flexDirection="column">
       {children}
 
-      <BoxTitle icon="layers" title="VOICE MODULE" />
+      <BoxTitle icon="feed" title="VOICE MODULE" />
 
       {/* <DefaultBoards /> */}
       <strong>

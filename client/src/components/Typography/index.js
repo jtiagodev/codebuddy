@@ -2,10 +2,11 @@ import styled from "styled-components";
 import { colorPalette } from "../../theme/color-pallete";
 
 export const Title = styled.span`
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Open Sans, Helvetica Neue, Icons16, sans-serif;
+  font-family: "Bubblegum Sans", cursive, -apple-system, BlinkMacSystemFont,
+    Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Open Sans, Helvetica Neue,
+    Icons16, sans-serif;
   font-weight: bold;
-  font-size: 15px;
+  font-size: 20px;
   color: white;
 `;
 

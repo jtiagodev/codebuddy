@@ -22,9 +22,10 @@ import { getUsername, startSpeechFunction } from "../../lib/voicerecognition";
 const Body = styled(Flex)`
   width: 100vw;
   height: 100vh;
-  background: #30404d;
+  background: #edff8f;
   flex-direction: row;
   flex-wrap: wrap;
+  opacity: 1;
 `;
 
 const OneThirdFlex = styled(Flex)`
@@ -38,7 +39,7 @@ const TwoThirdsFlex = styled(Flex)`
 `;
 
 const Codi = () => {
-  const [{ userName }, dispatch] = useStateValue();
+  const [{ userName, status, system }, dispatch] = useStateValue();
 
   useEffect(() => {
     console.log("USEEFFECT - STARTUP");
@@ -83,7 +84,7 @@ const Codi = () => {
         <CameraBlocksDetection>
           <VideoCanvas />
         </CameraBlocksDetection>
-        <SystemStatus />
+        <SystemStatus userName={userName} status={status} system={system} />
       </OneThirdFlex>
       <TwoThirdsFlex>
         <VoiceModule />

@@ -11,12 +11,12 @@ import { executeRobot } from "../../lib/execution";
 import { Button } from "react-bootstrap";
 
 const Wrapper = styled(Flex)`
-  background: #27343e;
+  background: #ff9668;
   height: 30%;
   margin: 2vh;
   padding: 10px;
   border-radius: 5px;
-  border: 2px solid #232f38;
+  // border: 2px solid #232f38;
 `;
 
 // const Spacer = styled.div`
@@ -57,9 +57,7 @@ const Wrapper = styled(Flex)`
 //   this.setState(this.state);
 // };
 
-const SystemStatus = props => {
-  const [{ userName, status, system }, dispatch] = useStateValue();
-
+const SystemStatus = ({ userName, status, system, children }) => {
   // const renderStatus = status => {
   //   switch (status) {
   //     case "ONLINE":
@@ -79,8 +77,8 @@ const SystemStatus = props => {
 
   return (
     <Wrapper className="bp3-dark" flexDirection="column">
-      <BoxTitle icon="document" title="SYSTEM STATUS" />
-      {props.children}
+      <BoxTitle icon="dashboard" title="SYSTEM STATUS" />
+      {children}
 
       <span>{`HELLO ${userName}`}</span>
       <span>SYSTEM: {status.toUpperCase()}</span>
