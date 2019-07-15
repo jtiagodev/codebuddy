@@ -83,46 +83,52 @@ export const initialState = {
 
 export const reducer = (state, action) => {
   switch (action.type) {
+    case "SET_USERNAME":
+      return {
+        ...state,
+        userName: action.userName
+      };
+
     case "SET_STATUS":
       return {
         ...state,
-        userName: action.payload.userName
+        status: action.status
       };
 
     case "SET_SYSTEM_VOICE":
       return {
         ...state,
-        system: { ...state.system, voice: action.payload.voice }
+        system: { ...state.system, voice: action.voice }
       };
 
     case "SET_SYSTEM_CAMERA":
       return {
         ...state,
-        system: { ...state.system, camera: action.payload.camera }
+        system: { ...state.system, camera: action.camera }
       };
 
     case "SET_SYSTEM_ROBOT":
       return {
         ...state,
-        system: { ...state.system, robot: action.payload.robot }
+        system: { ...state.system, robot: action.robot }
       };
 
     case "SET_CONFIG_BOARDSELECTED":
       return {
         ...state,
-        config: { ...state.config, boardSelected: action.payload.boardSelected }
+        config: { ...state.config, boardSelected: action.boardSelected }
       };
 
     case "SET_CONFIG_ROBOTSELECTED":
       return {
         ...state,
-        config: { ...state.config, robotSelected: action.payload.robotSelected }
+        config: { ...state.config, robotSelected: action.robotSelected }
       };
 
     case "SET_CONFIG_BOARDSIZE":
       return {
         ...state,
-        config: { ...state.config, boardSize: action.payload.boardSize }
+        config: { ...state.config, boardSize: action.boardSize }
       };
 
     case "SET_CONFIG_AVAILABLEVOICECOMMANDS":
@@ -130,7 +136,7 @@ export const reducer = (state, action) => {
         ...state,
         config: {
           ...state.config,
-          availableVoiceCommands: action.payload.availableVoiceCommands
+          availableVoiceCommands: action.availableVoiceCommands
         }
       };
 
@@ -139,7 +145,7 @@ export const reducer = (state, action) => {
         ...state,
         voice: {
           ...state.voice,
-          lastCommandDetected: action.payload.lastCommandDetected
+          lastCommandDetected: action.lastCommandDetected
         }
       };
 
@@ -148,14 +154,14 @@ export const reducer = (state, action) => {
         ...state,
         voice: {
           ...state.voice,
-          lastCommandAccuracy: action.payload.lastCommandAccuracy
+          lastCommandAccuracy: action.lastCommandAccuracy
         }
       };
 
     case "SET_VOICE_STATISTICS":
       return {
         ...state,
-        voice: { ...state.voice, statistics: action.payload.statistics }
+        voice: { ...state.voice, statistics: action.statistics }
       };
 
     case "SET_VIDEO_IDENTIFIEDBOARD":
@@ -163,7 +169,7 @@ export const reducer = (state, action) => {
         ...state,
         video: {
           ...state.video,
-          identifiedBoard: action.payload.identifiedBoard
+          identifiedBoard: action.identifiedBoard
         }
       };
 
@@ -172,7 +178,7 @@ export const reducer = (state, action) => {
         ...state,
         video: {
           ...state.video,
-          identifiedCommands: action.payload.identifiedCommands
+          identifiedCommands: action.identifiedCommands
         }
       };
 
@@ -181,7 +187,7 @@ export const reducer = (state, action) => {
         ...state,
         video: {
           ...state.video,
-          commandsInterfaceGroup1: action.payload.commandsInterfaceGroup1
+          commandsInterfaceGroup1: action.commandsInterfaceGroup1
         }
       };
 

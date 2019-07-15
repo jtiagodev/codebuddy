@@ -92,6 +92,7 @@ const SystemStatus = ({ children }) => {
       <BoxTitle icon="document" title="SYSTEM STATUS" />
       {children}
 
+      <span>{`HELLO ${state.userName}`}</span>
       <span>SYSTEM: {renderStatus(systemStatus)}</span>
       <span>VOICE RECOGNITION: {renderStatus(voiceStatus)}</span>
       <span>VIDEO RECOGNITION: {renderStatus(videoStatus)}</span>
