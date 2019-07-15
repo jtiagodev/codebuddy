@@ -49,6 +49,40 @@ const Codi = () => {
     const startUp = async () => {
       await getUsername()
         .then(res => {
+          // const setVoiceStatisticsFailure = () => {
+          //   dispatch({
+          //     type: "SET_VOICE_STATISTICS_FAILURE",
+          //     payload: ""
+          //   });
+          // };
+
+          // const setVoiceStatisticsSuccess = () => {
+          //   dispatch({
+          //     type: "SET_VOICE_STATISTICS_SUCCESS",
+          //     payload: ""
+          //   });
+          // };
+
+          const setVoiceLastcommandDetected = lastCommandIdentified => {
+            dispatch({
+              type: "SET_VOICE_LASTCOMMANDDETECTED",
+              lastCommandIdentified
+            });
+          };
+
+          const setVoiceCommandAccuracy = lastCommandAccuracy => {
+            dispatch({
+              type: "SET_VOICE_LASTCOMMANDACCURACY",
+              lastCommandAccuracy
+            });
+          };
+          const setSystemVoiceStatus = voice => {
+            dispatch({
+              type: "SET_SYSTEM_VOICE",
+              voice
+            });
+          };
+
           dispatch({
             type: "SET_USERNAME",
             userName: res
@@ -60,7 +94,12 @@ const Codi = () => {
             camera: "recognizing board"
           });
 
-          startSpeechFunction();
+          startSpeechFunction(
+            setVoiceLastcommandDetected,
+            setVoiceCommandAccuracy,
+            setSystemVoiceStatus,
+            res
+          );
           dispatch({
             type: "SET_SYSTEM_VOICE",
             voice: "LISTENING..."

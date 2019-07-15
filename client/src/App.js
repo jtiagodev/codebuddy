@@ -25,7 +25,6 @@ const App = () => {
     <div className="App">
       <StateProvider initialState={initialState} reducer={reducer}>
         <Codi />
-
         <Footer />
         <img
           style={{ width: "250px" }}

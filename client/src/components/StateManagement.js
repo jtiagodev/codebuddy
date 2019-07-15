@@ -145,7 +145,7 @@ export const reducer = (state, action) => {
         ...state,
         voice: {
           ...state.voice,
-          lastCommandDetected: action.lastCommandDetected
+          lastCommandIdentified: action.lastCommandIdentified
         }
       };
 
@@ -162,6 +162,30 @@ export const reducer = (state, action) => {
       return {
         ...state,
         voice: { ...state.voice, statistics: action.statistics }
+      };
+
+    case "SET_VOICE_STATISTICS_SUCCESS":
+      return {
+        ...state,
+        voice: {
+          ...state.voice,
+          statistics: {
+            recognized: state.voice.statistics.recognized + 1,
+            unrecognized: state.voice.statistics.unrecognized
+          }
+        }
+      };
+
+    case "SET_VOICE_STATISTICS_FAILURE":
+      return {
+        ...state,
+        voice: {
+          ...state.voice,
+          statistics: {
+            recognized: state.voice.statistics.recognized,
+            unrecognized: state.voice.statistics.unrecognized + 1
+          }
+        }
       };
 
     case "SET_VIDEO_IDENTIFIEDBOARD":

@@ -56,22 +56,6 @@ const Wrapper = styled(Flex)`
 const SystemStatus = ({ children }) => {
   const [{ userName, status, system }, dispatch] = useStateValue();
   const { voice, camera } = system;
-  // const renderStatus = status => {
-  //   switch (status) {
-  //     case "ONLINE":
-  //       return <span style={{ color: "green" }}>{status}</span>;
-  //     case "OFFLINE":
-  //       return <span style={{ color: "red" }}>{status}</span>;
-  //     case "PROCESSING":
-  //       return <span style={{ color: "blue" }}>{status}</span>;
-  //     case "LISTENING":
-  //       return <span style={{ color: "green" }}>{status}</span>;
-  //     case "RECOGNIZING":
-  //       return <span style={{ color: "blue" }}>{status}</span>;
-  //     default:
-  //       return <span style={{ color: "blue" }}>{status}</span>;
-  //   }
-  // };
 
   return (
     <Wrapper className="bp3-dark" alignItems="start" flexDirection="column">
