@@ -58,11 +58,11 @@ const Wrapper = styled(Flex)`
 // };
 
 const SystemStatus = ({ children }) => {
-  const [{ status }, dispatch] = useStateValue();
+  const [state, dispatch] = useStateValue();
 
-  const systemStatus = status.system.toUpperCase();
-  const voiceStatus = status.voice.toUpperCase();
-  const videoStatus = status.video.toUpperCase();
+  const systemStatus = state.status.toUpperCase();
+  const voiceStatus = state.system.voice.toUpperCase();
+  const videoStatus = state.system.camera.toUpperCase();
 
   const renderStatus = status => {
     switch (status) {

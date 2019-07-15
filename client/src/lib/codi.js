@@ -9,7 +9,9 @@ export const voiceCommandsRegex = {
   saveMapToDatabase: /.*(save|send) (map|board).*/,
   saveSolutionToDatabase: /.*(save|send) (solution|sequence).*/,
   thankYou: /.*(thank you)|(thanks).*/,
-  whoAreYou: /.*(who are you).*/
+  whoAreYou: /.*(who are you).*/,
+  hi: /.*(hello|hi|hey) (codi|kodi|buddy|cody|robot).*/,
+  nameReply: /.*(my name is).*/
 };
 
 export const anglesDirections = {
@@ -78,4 +80,11 @@ export const validSolutionCommands = {
   171: "If",
   173: "Then",
   179: "Else"
+};
+
+export const systemStatus = {
+  1: "Recognizing Board",
+  2: "Recognizing Commands",
+  3: "Computing Solution",
+  4: "Executing"
 };

@@ -1,5 +1,3 @@
-var synth = window.speechSynthesis;
-
 // var inputForm = document.querySelector('form');
 // var inputTxt = document.querySelector('.txt');
 // var voiceSelect = document.querySelector("select");
@@ -9,20 +7,6 @@ var synth = window.speechSynthesis;
 // var rate = document.querySelector('#rate');
 // var rateValue = document.querySelector('.rate-value');
 
-var defaultPitchValue = 1;
-var defaultRateValue = 1;
-
-var voices = [];
-
-function populateVoiceList() {
-  voices = synth.getVoices().sort(function(a, b) {
-    const aname = a.name.toUpperCase(),
-      bname = b.name.toUpperCase();
-    if (aname < bname) return -1;
-    else if (aname === bname) return 0;
-    else return +1;
-  });
-}
 //   var selectedIndex =
 //     voiceSelect.selectedIndex < 0 ? 0 : voiceSelect.selectedIndex;
 //   voiceSelect.innerHTML = "";
@@ -41,13 +25,29 @@ function populateVoiceList() {
 //   voiceSelect.selectedIndex = selectedIndex;
 // }
 
-populateVoiceList();
-
 // if (speechSynthesis.onvoiceschanged !== undefined) {
 //   speechSynthesis.onvoiceschanged = populateVoiceList;
 // }
 
 export const speak = text => {
+  var synth = window.speechSynthesis;
+
+  var defaultPitchValue = 1;
+  var defaultRateValue = 1;
+
+  var voices = [];
+
+  function populateVoiceList() {
+    voices = synth.getVoices().sort(function(a, b) {
+      const aname = a.name.toUpperCase(),
+        bname = b.name.toUpperCase();
+      if (aname < bname) return -1;
+      else if (aname === bname) return 0;
+      else return +1;
+    });
+  }
+  populateVoiceList();
+
   var utterThis = new SpeechSynthesisUtterance(text);
 
   // if (synth.speaking) {

@@ -6,6 +6,7 @@ import { Title, InstallerLink } from "../Typography";
 import BoxTitle from "../BoxTitle";
 
 const Wrapper = styled(Flex)`
+  background: #27343e;
   height: 60%;
   margin: 2vh 2vh 0px 2vh;
   padding: 10px;
