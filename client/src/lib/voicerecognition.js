@@ -6,18 +6,18 @@ import { runCameraRecognition as solutionRecognition } from "../lib/solutionreco
 
 export const startSpeechFunction = () => {
   // Import Web Speech API
-  var SpeechRecognition =
+  let SpeechRecognition =
     window.SpeechRecognition || window.webkitSpeechRecognition;
-  var SpeechGrammarList =
+  let SpeechGrammarList =
     window.SpeechGrammarList || window.webkitSpeechGrammarList;
-  var SpeechRecognitionEvent =
+  let SpeechRecognitionEvent =
     window.SpeechRecognitionEvent || window.webkitSpeechRecognitionEvent;
 
   // API
-  var grammar =
+  let grammar =
     "#JSGF V1.0; grammar phrase; public <phrase> = save | send | compute | recognize | execute | solution | sequence | commands | board | map | codi | database";
-  var recognition = new SpeechRecognition();
-  var speechRecognitionList = new SpeechGrammarList();
+  let recognition = new SpeechRecognition();
+  let speechRecognitionList = new SpeechGrammarList();
   speechRecognitionList.addFromString(grammar, 1);
   recognition.grammars = speechRecognitionList;
   recognition.lang = "en-US";
@@ -46,46 +46,46 @@ export const startSpeechFunction = () => {
 
     if (speechResult.toLowerCase().match(voiceCommandsRegex.readSolution)) {
       speak("Reading Solution....");
-      voiceLastMessage.textContent = speechResult;
-      confidenceLevel.textContent = confidenceResult;
+      // voiceLastMessage.textContent = speechResult;
+      // confidenceLevel.textContent = confidenceResult;
     } else if (
       speechResult.toLowerCase().match(voiceCommandsRegex.whatIsThis)
     ) {
       speak("This is .....");
-      voiceLastMessage.textContent = speechResult;
-      confidenceLevel.textContent = confidenceResult;
+      // voiceLastMessage.textContent = speechResult;
+      // confidenceLevel.textContent = confidenceResult;
     } else if (
       speechResult.toLowerCase().match(voiceCommandsRegex.computeSequence)
     ) {
       speak("Computing Solution...");
-      voiceLastMessage.textContent = speechResult;
-      confidenceLevel.textContent = confidenceResult;
+      // voiceLastMessage.textContent = speechResult;
+      // confidenceLevel.textContent = confidenceResult;
     } else if (
       speechResult.toLowerCase().match(voiceCommandsRegex.recognizeBoard)
     ) {
       speak("Recognizing Board");
-      voiceLastMessage.textContent = speechResult;
-      confidenceLevel.textContent = confidenceResult;
+      // voiceLastMessage.textContent = speechResult;
+      // confidenceLevel.textContent = confidenceResult;
       mapRecognition();
     } else if (
       speechResult.toLowerCase().match(voiceCommandsRegex.recognizeSolution)
     ) {
       speak("Recognizing Solution");
-      voiceLastMessage.textContent = speechResult;
-      confidenceLevel.textContent = confidenceResult;
+      // voiceLastMessage.textContent = speechResult;
+      // confidenceLevel.textContent = confidenceResult;
       solutionRecognition();
     } else if (
       speechResult.toLowerCase().match(voiceCommandsRegex.executeSolution)
     ) {
       speak("Executing Solution");
-      voiceLastMessage.textContent = speechResult;
-      confidenceLevel.textContent = confidenceResult;
+      // voiceLastMessage.textContent = speechResult;
+      // confidenceLevel.textContent = confidenceResult;
     } else if (speechResult.toLowerCase().match(voiceCommandsRegex.thankYou)) {
       speak("You are welcome human");
     } else if (speechResult.toLowerCase().match(voiceCommandsRegex.whoAreYou)) {
       let phrases = [
         "I'm a cybernetic organism and i'm here to kill John Connor",
-        "This is my sister, she is number one in kazakhstan!"
+        "My real name is TRON"
       ];
       speak(phrases[Math.round(Math.random())]);
     } else if (
@@ -99,7 +99,7 @@ export const startSpeechFunction = () => {
     ) {
       speak("Saving Solution to Database");
     } else {
-      voiceLastMessage.textContent = speechResult + "(no command recognized)";
+      // voiceLastMessage.textContent = speechResult + "(no command recognized)";
     }
   };
 
@@ -122,7 +122,7 @@ export const startSpeechFunction = () => {
     //console.log("SpeechRecognition.onend");
 
     let voiceStatus = document.querySelector(".voice-status");
-    voiceStatus.textContent = "Listening...";
+    // voiceStatus.textContent = "Listening...";
 
     // Emulates Continuous Speech Recognition
     recognition.stop();
@@ -147,9 +147,8 @@ export const startSpeechFunction = () => {
   recognition.onspeechstart = function(event) {
     //Fired when sound that is recognised by the speech recognition service as speech has been detected.
     //console.log("SpeechRecognition.onspeechstart");
-
-    let voiceStatus = document.querySelector(".voice-status");
-    voiceStatus.textContent = "Processing...";
+    // let voiceStatus = document.querySelector(".voice-status");
+    // voiceStatus.textContent = "Processing...";
   };
   recognition.onstart = function(event) {
     //Fired when the speech recognition service has begun listening to incoming audio with intent to recognize grammars associated with the current SpeechRecognition.
@@ -160,11 +159,11 @@ export const startSpeechFunction = () => {
 export const getUsername = () =>
   new Promise((resolve, reject) => {
     // API
-    const SpeechRecognition =
+    let SpeechRecognition =
       window.SpeechRecognition || window.webkitSpeechRecognition;
-    const SpeechGrammarList =
+    let SpeechGrammarList =
       window.SpeechGrammarList || window.webkitSpeechGrammarList;
-    const SpeechRecognitionEvent =
+    let SpeechRecognitionEvent =
       window.SpeechRecognitionEvent || window.webkitSpeechRecognitionEvent;
 
     var grammar =

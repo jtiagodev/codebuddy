@@ -57,45 +57,35 @@ const Wrapper = styled(Flex)`
 //   this.setState(this.state);
 // };
 
-const SystemStatus = ({ children }) => {
-  const [state, dispatch] = useStateValue();
+const SystemStatus = props => {
+  const [{ userName, status, system }, dispatch] = useStateValue();
 
-  const systemStatus = state.status.toUpperCase();
-  const voiceStatus = state.system.voice.toUpperCase();
-  const videoStatus = state.system.camera.toUpperCase();
-
-  const renderStatus = status => {
-    switch (status) {
-      case "ONLINE":
-        return <span style={{ color: "green" }}>{status}</span>;
-        break;
-      case "OFFLINE":
-        return <span style={{ color: "red" }}>{status}</span>;
-        break;
-      case "PROCESSING":
-        return <span style={{ color: "blue" }}>{status}</span>;
-        break;
-      case "LISTENING":
-        return <span style={{ color: "green" }}>{status}</span>;
-        break;
-      case "RECOGNIZING":
-        return <span style={{ color: "blue" }}>{status}</span>;
-        break;
-      default:
-        return <span>{status}</span>;
-        break;
-    }
-  };
+  // const renderStatus = status => {
+  //   switch (status) {
+  //     case "ONLINE":
+  //       return <span style={{ color: "green" }}>{status}</span>;
+  //     case "OFFLINE":
+  //       return <span style={{ color: "red" }}>{status}</span>;
+  //     case "PROCESSING":
+  //       return <span style={{ color: "blue" }}>{status}</span>;
+  //     case "LISTENING":
+  //       return <span style={{ color: "green" }}>{status}</span>;
+  //     case "RECOGNIZING":
+  //       return <span style={{ color: "blue" }}>{status}</span>;
+  //     default:
+  //       return <span style={{ color: "blue" }}>{status}</span>;
+  //   }
+  // };
 
   return (
     <Wrapper className="bp3-dark" flexDirection="column">
       <BoxTitle icon="document" title="SYSTEM STATUS" />
-      {children}
+      {props.children}
 
-      <span>{`HELLO ${state.userName}`}</span>
-      <span>SYSTEM: {renderStatus(systemStatus)}</span>
-      <span>VOICE RECOGNITION: {renderStatus(voiceStatus)}</span>
-      <span>VIDEO RECOGNITION: {renderStatus(videoStatus)}</span>
+      <span>{`HELLO ${userName}`}</span>
+      <span>SYSTEM: {status.toUpperCase()}</span>
+      <span>VOICE RECOGNITION: {system.voice.toUpperCase()}</span>
+      <span>VIDEO RECOGNITION: {system.camera.toUpperCase()}</span>
       <br />
       <ControlRecognition />
       <br />
