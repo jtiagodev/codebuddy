@@ -13,16 +13,18 @@ Learning programming is becoming an important part in children's education and i
 `cd/client`  
 `npm run install`  
 `npm run start`  
+
 `cd/meta`  
 `npm run install`  
 `npm run start`  
+
 `cd/server`  
 `npm run install`  
 `npm run start`  
 
 2. You can now access CodeBuddy here [localhost:3000](http://localhost:3000)
 3. You can access CodeBuddy's Metadata Support here [localhost:1337](http://localhost:1337)
-   1. Please note, you should register here first [localhost:1337/admin](http://localhost:1337/admin)
+*NOTE: you should register here first [localhost:1337/admin](http://localhost:1337/admin)*
 4. The LocalServer is available at [localhost:3001](http://localhost:3001)
 
 ## System Usage
@@ -59,39 +61,37 @@ Learning programming is becoming an important part in children's education and i
 
 ## Roadmap
 
-- __Client__
+:computer: __Client__  
 - [x] Initial GUI
 - [x] Voice Recognition Module
 - [x] Logic Layer built with RegEx Patterns
 - [x] Voice Synthesis Module
 - [x] Board Recognition Module
 - [x] Commands Recognition Module
-- __Meta__
+:computer: __Meta__  
 - [x] Accessible Metadata Configuration
-- __Remote (Server)__
+:computer: __Remote (Server)__  
 - [x] Save Map and Commands History to Realtime Database
 - [ ] Result Computation Module
-- __Local (Server)__
+:computer: __Local (Server)__  
 - [x] Result Execution Interface
 - [ ] Robot Execution Interface (Python)
 - [ ] Robot Execution Scripts: WonderWorks Dash
-- [ ] Chatbot Integration to replace RegEx Patterns *(in progress)*
+- [ ] ChatBot Integration to replace RegEx Patterns *(in progress)*
 - [ ] Further Integration with more Robots from WonderWorks, LEGO, etc.
 - [ ] User Accounts and Analytics (Gamification)
-- __CLI__
+:computer: __CLI__  
 - [ ] CodeBuddy's Command Line Interface for project bootstrap
-
-## License
-
-CodeBuddy is distributed under [Apache 2.0 License](https://github.com/jtiagodev/codebuddy/blob/master/LICENSE)
 
 ## Credits
 
 Paper available at (coming soon)  
 Project developed by __Catarina Silvas__, __Daniel São Pedro__ && __João Tiago__  
-*Advanced Interaction Techniques, Master in Computer Science (__Professor Luís Carriço && Professor Tiago Guerreiro__)
+*Advanced Interaction Techniques, Master in Computer Science (__Professor Luís Carriço && Professor Tiago Guerreiro__)*
 *Faculty of Sciences of the University of Lisbon*  
 *LaSIGE - Large Scale Systems Laboratory*  
 *2019*  
 
+## License
 
+CodeBuddy is distributed under [Apache 2.0 License](https://github.com/jtiagodev/codebuddy/blob/master/LICENSE)
