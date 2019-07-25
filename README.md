@@ -61,33 +61,33 @@ Learning programming is becoming an important part in children's education and i
 
 ## Roadmap
 
-:computer: __Client__  
+- __Client__  
 - [x] Initial GUI
 - [x] Voice Recognition Module
 - [x] Logic Layer built with RegEx Patterns
 - [x] Voice Synthesis Module
 - [x] Board Recognition Module
-- [x] Commands Recognition Module
-:computer: __Meta__  
-- [x] Accessible Metadata Configuration
-:computer: __Remote (Server)__  
+- [x] Commands Recognition Module  
+- __Meta__  
+- [x] Accessible Metadata Configuration  
+- __Remote (Server)__  
 - [x] Save Map and Commands History to Realtime Database
-- [ ] Result Computation Module
-:computer: __Local (Server)__  
+- [ ] Result Computation Module  
+- __Local (Server)__  
 - [x] Result Execution Interface
 - [ ] Robot Execution Interface (Python)
 - [ ] Robot Execution Scripts: WonderWorks Dash
 - [ ] ChatBot Integration to replace RegEx Patterns *(in progress)*
 - [ ] Further Integration with more Robots from WonderWorks, LEGO, etc.
-- [ ] User Accounts and Analytics (Gamification)
-:computer: __CLI__  
+- [ ] User Accounts and Analytics (Gamification)  
+- __CLI__  
 - [ ] CodeBuddy's Command Line Interface for project bootstrap
 
 ## Credits
 
 Paper available at (coming soon)  
 Project developed by __Catarina Silvas__, __Daniel São Pedro__ && __João Tiago__  
-*Advanced Interaction Techniques, Master in Computer Science (__Professor Luís Carriço && Professor Tiago Guerreiro__)*
+*Advanced Interaction Techniques, Master in Computer Science (__Professor Luís Carriço && Professor Tiago Guerreiro__)*  
 *Faculty of Sciences of the University of Lisbon*  
 *LaSIGE - Large Scale Systems Laboratory*  
 *2019*  
