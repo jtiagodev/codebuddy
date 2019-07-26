@@ -52,15 +52,14 @@ Learning programming is becoming an important part in children's education and i
 
 ### Solution Overview
 ![Overview](https://i.ibb.co/SnxFKXW/codebuddy-solution-overview.png)
-### Remove Server
+### Client / GUI
+![Client](https://i.ibb.co/NFzy8gG/codebuddy-client.png)
+### Remote Server
 ![RemoteServer](https://i.ibb.co/YTw3LBc/codebuddy-remote.png)
 ### Local Server
 ![LocalServer](https://i.ibb.co/3SBXLgD/codebuddy-local.png)
-### Client / GUI
-![Client](https://i.ibb.co/NFzy8gG/codebuddy-client.png)
 
 ## Roadmap
-
 - __Client__  
 - [x] Initial GUI
 - [x] Voice Recognition Module
