@@ -84,7 +84,7 @@ Learning programming is becoming an important part in children's education and i
 
 ## Credits
 
-Paper available at (coming soon)  
+Paper available ![here](https://github.com/jtiagodev/codebuddy/blob/master/paper.pdf)
 Project developed by __Catarina Fitas__, __Daniel São Pedro__ && __João Tiago__  
 *Advanced Interaction Techniques, Master in Computer Science (__Professor Luís Carriço && Professor Tiago Guerreiro__)*  
 *Faculty of Sciences of the University of Lisbon*  
