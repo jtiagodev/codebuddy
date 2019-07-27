@@ -8,7 +8,7 @@ Learning programming is becoming an important part in children's education and i
 
 ## System Installation (v1.0)
 
-* __PRE-REQUISITE__: you need ![Node.js](https://nodejs.org/), ![git](https://git-scm.com/downloads) and ![Python](https://www.python.org/) installed on your computer
+* __PRE-REQUISITE__: you need [Node.js](https://nodejs.org/), [git](https://git-scm.com/downloads) and [Python](https://www.python.org/) installed on your computer
 
 1. Download the project from github
 
@@ -91,7 +91,7 @@ Learning programming is becoming an important part in children's education and i
 
 ## Credits
 
-Paper available ![here](https://github.com/jtiagodev/codebuddy/blob/master/paper.pdf)
+Paper available [here](https://github.com/jtiagodev/codebuddy/blob/master/paper.pdf)
 Project developed by __Catarina Fitas__, __Daniel São Pedro__ && __João Tiago__  
 *Advanced Interaction Techniques, Master in Computer Science (__Professor Luís Carriço && Professor Tiago Guerreiro__)*  
 *Faculty of Sciences of the University of Lisbon*  
