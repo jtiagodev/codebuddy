@@ -8,7 +8,13 @@ Learning programming is becoming an important part in children's education and i
 
 ## System Installation (v1.0)
 
-1. While on the __terminal__, run the Node Package Manager Installer on each component of the project to install dependencies
+* __PRE-REQUISITE__: you need ![Node.js](https://nodejs.org/), ![git](https://git-scm.com/downloads) and ![Python](https://www.python.org/) installed on your computer
+
+1. Download the project from github
+
+`git clone https://github.com/jtiagodev/codebuddy.git`
+
+2. Run the Node Package Manager Installer on each component of the project to install dependencies
 
 `cd/client`  
 `npm run install`  
@@ -22,10 +28,11 @@ Learning programming is becoming an important part in children's education and i
 `npm run install`  
 `npm run start`  
 
-2. You can now access CodeBuddy here [localhost:3000](http://localhost:3000)
-3. You can access CodeBuddy's Metadata Support here [localhost:1337](http://localhost:1337)
-*NOTE: you should register here first [localhost:1337/admin](http://localhost:1337/admin)*
-4. The LocalServer is available at [localhost:3001](http://localhost:3001)
+3. Add your Environment Variables, create a __.env__ file under /client, /meta and /server
+4. Access the application:
+   1. Access CodeBuddy's GUI here [localhost:3000](http://localhost:3000)
+   2. Access CodeBuddy's Metadata Support here [localhost:1337](http://localhost:1337)
+   3. Local Server is available at [localhost:3001](http://localhost:3001)
 
 ## System Usage
 
